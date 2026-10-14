@@ -1,0 +1,647 @@
+<!-- AstraTech AI — Tactical Cyber Blueprint -->
+<!DOCTYPE html>
+
+<html class="dark" lang="en" style=""><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script>tailwind.config = {darkMode: "class", theme: {extend: {colors: {canvas: "#07090e", surface: "#111318", "surface-card": "#101420", "surface-panel": "#141a29", "hud-amber": "#f59e0b", "hud-amber-light": "#fbbf24", "hud-green": "#10b981", "hud-cyan": "#06b6d4", "line-dim": "rgba(245, 158, 11, 0.15)", "line-blueprint": "rgba(56, 189, 248, 0.12)", "border-hud": "rgba(245, 158, 11, 0.25)", "border-glow": "rgba(16, 185, 129, 0.35)", "text-lead": "#f8fafc", "text-dim": "#94a3b8", "surface-container-highest": "#32353a", "on-secondary": "#2b3136", "on-secondary-fixed-variant": "#41484c", "on-primary": "#2d3137", "primary-container": "#0d1117", "surface-container-high": "#272a2f", "surface-bright": "#37393e", "secondary-fixed-dim": "#c1c7cd", "on-secondary-container": "#b3b9bf", "primary-fixed": "#dfe2eb", "on-tertiary": "#3a2e26", "surface-container": "#1d2024", "on-primary-container": "#797d85", error: "#ffb4ab", "tertiary-container": "#180f08", outline: "#8f9095", "inverse-primary": "#5b5e66", "error-container": "#93000a", "surface-tint": "#c3c6cf", "surface-dim": "#111318", "on-primary-fixed": "#181c22", "on-primary-fixed-variant": "#43474e", "outline-variant": "#45474b", "tertiary-fixed-dim": "#d6c3b7", "primary-fixed-dim": "#c3c6cf", background: "#111318", "surface-container-lowest": "#0c0e13", "surface-container-low": "#191c20", "on-background": "#e1e2e9", "secondary-container": "#434a4f", primary: "#c3c6cf", "on-tertiary-container": "#897a6f", "on-error-container": "#ffdad6", "on-surface": "#e1e2e9", "on-secondary-fixed": "#161c21", "tertiary-fixed": "#f3dfd2", "surface-variant": "#32353a", "on-tertiary-fixed": "#231a12", "inverse-on-surface": "#2e3035", tertiary: "#d6c3b7", "on-tertiary-fixed-variant": "#51443b", "on-error": "#690005", secondary: "#c1c7cd", "on-surface-variant": "#c6c6cb", "secondary-fixed": "#dde3e9", "inverse-surface": "#e1e2e9"}, fontFamily: {mono: ["'JetBrains Mono'", "monospace"], sans: ["'Space Grotesk'", "sans-serif"], headline: ["Sora"], display: ["Sora"], body: ["Space Grotesk"], label: ["Space Grotesk"]}, fontSize: {}, borderRadius: {DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px"}}}};</script><style>
+  @layer base {
+    body {
+      background-color: #06080d;
+      color: #cbd5e1;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+  }
+  .blueprint-grid {
+    background-image: 
+      linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+      linear-gradient(to right, rgba(245, 158, 11, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(245, 158, 11, 0.08) 1px, transparent 1px);
+    background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+  }
+  .hud-scanline {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01) 50%, rgba(0, 0, 0, 0.35) 51%);
+    background-size: 100% 4px;
+  }
+  .corner-bracket {
+    position: relative;
+  }
+  .corner-bracket::before, .corner-bracket::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    pointer-events: none;
+  }
+  .corner-bracket::before {
+    top: -1px; left: -1px;
+    border-top: 2px solid #f59e0b;
+    border-left: 2px solid #f59e0b;
+  }
+  .corner-bracket::after {
+    bottom: -1px; right: -1px;
+    border-bottom: 2px solid #f59e0b;
+    border-right: 2px solid #f59e0b;
+  }
+  .crosshair {
+    position: relative;
+  }
+  .crosshair::before {
+    content: '+';
+    position: absolute;
+    font-family: 'JetBrains Mono', monospace;
+    color: #f59e0b;
+    font-size: 12px;
+    opacity: 0.6;
+  }
+</style></head><body class="bg-[#06080d] text-slate-300 font-sans selection:bg-hud-amber selection:text-black antialiased relative blueprint-grid"><div class="fixed inset-0 pointer-events-none hud-scanline z-40 opacity-40"></div>
+<!-- TOP STATUS TELEMETRY STRIP -->
+<div class="w-full bg-[#080b12] border-b border-border-hud/50 py-1 px-4 text-[10px] font-mono flex items-center justify-between text-text-dim relative z-50">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1.5 text-hud-green"><span class="w-1.5 h-1.5 rounded-full bg-hud-green animate-ping"></span>[SYS_STATUS: NOMINAL // FEED: 99.8%]</span>
+<span class="hidden md:inline text-amber-500/80">[LAT: 22.8046°N // LON: 86.2029°E]</span>
+<span class="hidden lg:inline text-slate-500">[REGION: JAMSHEDPUR, JHARKHAND - NODE_01]</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-hud-amber font-semibold">[DEF_AUTH: PROTOCOL_L5]</span>
+<span class="text-slate-400">CLK: UTC+05:30</span>
+</div>
+</div>
+<!-- TACTICAL NAVIGATION BAR -->
+<header class="sticky top-0 left-0 right-0 z-50 bg-[#090d16]/90 backdrop-blur-md border-b border-amber-500/30 shadow-[0_4px_25px_rgba(0,0,0,0.8)]"><div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<a class="flex items-center gap-2 group" data-path="home" href="/">
+<div class="w-8 h-8 rounded border border-hud-amber/80 bg-black/60 flex items-center justify-center text-hud-amber group-hover:bg-hud-amber group-hover:text-black transition-all shadow-[0_0_10px_rgba(245,158,11,0.2)]">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-mono font-bold text-[15px] tracking-wider text-white">ASTRATECH</span>
+<span class="text-[9px] font-mono px-1 py-0.5 rounded bg-amber-500/10 text-hud-amber border border-amber-500/40">AI.OS</span>
+</div>
+<span class="text-[9px] font-mono text-slate-400 tracking-widest -mt-0.5">// JAMSHEDPUR LAB</span>
+</div>
+</a>
+</div>
+<nav class="hidden lg:flex items-center gap-6 font-mono text-xs text-slate-400" data-active-classes="text-hud-amber font-semibold"><a aria-current="page" class="text-hud-amber font-bold flex items-center gap-1" data-path="home" href="/"><span class="text-[10px] text-hud-amber/60">&gt;</span>HOME</a>
+<a class="hover:text-hud-amber transition-colors flex items-center gap-1" data-path="about" href="/about"><span class="text-[10px] text-slate-600">//</span>ABOUT</a>
+<a class="hover:text-hud-amber transition-colors flex items-center gap-1" data-path="courses" href="/courses"><span class="text-[10px] text-slate-600">//</span>COURSES</a><a class="hover:text-hud-amber transition-colors flex items-center gap-1" data-path="projects" href="/projects"><span class="text-[10px] text-slate-600">//</span>PROJECTS</a>
+<a class="hover:text-hud-amber transition-colors flex items-center gap-1" data-path="developers" href="/about"><span class="text-[10px] text-slate-600">//</span>DEVELOPERS</a>
+<a class="hover:text-hud-amber transition-colors flex items-center gap-1" data-path="media" href="#media"><span class="text-[10px] text-slate-600">//</span>MEDIA</a>
+<a class="hover:text-hud-amber transition-colors flex items-center gap-1" data-path="contact" href="#contact"><span class="text-[10px] text-slate-600">//</span>CONTACT</a></nav>
+<div class="flex items-center gap-3">
+<a class="font-mono text-xs inline-flex items-center gap-1.5 px-4 py-2 rounded bg-amber-500/10 border border-hud-amber text-hud-amber hover:bg-hud-amber hover:text-black font-semibold transition-all shadow-[0_0_15px_rgba(245,158,11,0.25)]" data-path="join-astratech" href="#join">
+<span class="">[INIT_ENROLL]</span>
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+</a>
+<div class="w-8 h-8 rounded border border-slate-700 bg-surface flex items-center justify-center text-slate-400 text-xs font-mono">
+<span class="">01</span>
+</div>
+</div>
+</div></header>
+<main class="w-full relative z-10">
+<!-- HERO SCHEMATIC SECTION -->
+<section class="relative w-full pt-10 pb-20 border-b border-border-hud/40 overflow-hidden">
+<!-- Blueprint Corner Crosshairs -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+<div class="flex items-center justify-between mb-4 text-[11px] font-mono text-amber-500/60 border-b border-amber-500/20 pb-2">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2 h-2 bg-hud-amber"></span>
+<span class="">HUD_STAGE: HERO_INITIALIZE // TARGET: REGIONAL TECH TALENT</span>
+</div>
+<div class="hidden sm:flex items-center gap-4">
+<span class="">ARCH: SEC_V4.2</span>
+<span class="">ZONE: JHARKHAND</span>
+</div>
+</div>
+<!-- Main Title Block with Terminal Bracket HUD -->
+<div class="corner-bracket bg-surface-card/60 p-6 md:p-10 border border-amber-500/30 backdrop-blur-sm relative">
+<div class="flex items-center gap-2 mb-3">
+<span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-hud-green/10 border border-hud-green text-hud-green tracking-widest">[ONLINE // ACTIVE COHORT ENROLLMENT]</span>
+<span class="text-xs font-mono text-slate-500">EST_2024</span>
+</div>
+<div class="max-w-4xl">
+<h1 class="font-mono text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight uppercase leading-[1.1] mb-4">
+          BUILDING THE NEXT GENERATION OF <span class="text-hud-amber drop-shadow-[0_0_15px_rgba(245,158,11,0.4)]">&lt;TECH TALENT/&gt;</span>
+</h1>
+<p class="font-sans text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed mb-6">
+          AstraTech AI is a technology education and developer community in Jamshedpur focused on practical learning, production-grade repositories, real projects, innovation, and first-principles engineering thinking.
+        </p>
+</div>
+<!-- Action Cluster -->
+<div class="flex flex-wrap items-center gap-4 mb-8">
+<a class="px-6 py-3 rounded font-mono text-xs uppercase font-bold bg-hud-amber text-black hover:bg-hud-amber-light hover:shadow-[0_0_20px_rgba(245,158,11,0.5)] transition-all flex items-center gap-2" href="#courses">
+<span class="">&gt; EXPLORE COURSES</span>
+<span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+</a>
+<a class="px-6 py-3 rounded font-mono text-xs uppercase font-semibold bg-black/50 border border-slate-700 text-slate-200 hover:border-hud-amber hover:text-hud-amber transition-all flex items-center gap-2" href="#join">
+<span class="">[JOIN_ASTRATECH]</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Telemetry Metrics Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 border-t border-amber-500/20 pt-6">
+<div class="p-3 bg-black/40 border border-slate-800 rounded">
+<div class="font-mono text-2xl font-bold text-hud-amber">100%</div>
+<div class="font-mono text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">Practical &amp; Git-Backed</div>
+</div>
+<div class="p-3 bg-black/40 border border-slate-800 rounded">
+<div class="font-mono text-2xl font-bold text-hud-green">0%</div>
+<div class="font-mono text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">Passive PPT Lectures</div>
+</div>
+<div class="p-3 bg-black/40 border border-slate-800 rounded">
+<div class="font-mono text-xl font-bold text-white">JAMSHEDPUR</div>
+<div class="font-mono text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">Jharkhand AI Hub</div>
+</div>
+<div class="p-3 bg-black/40 border border-slate-800 rounded">
+<div class="font-mono text-xl font-bold text-hud-cyan">PROD_READY</div>
+<div class="font-mono text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">Microservice Arch</div>
+</div>
+</div>
+</div>
+<!-- TERMINAL / HARDWARE SPLIT HUD PANEL -->
+<div class="mt-8 rounded border border-slate-800 bg-[#0a0d14] overflow-hidden shadow-2xl">
+<div class="bg-[#111624] px-4 py-2 border-b border-slate-800 flex items-center justify-between text-xs font-mono">
+<div class="flex items-center gap-2 text-slate-300">
+<span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
+<span class="ml-2 text-hud-amber font-semibold">astratech-core-engine@node-01:~$</span>
+</div>
+<span class="text-slate-400 font-mono text-[11px]">[SHELL: BASH v5.2]</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 font-mono text-xs">
+<div class="lg:col-span-7 p-5 bg-black/70 border-b lg:border-b-0 lg:border-r border-slate-800 space-y-2">
+<p class="text-hud-amber"><span class="text-white">$</span> astra init --stack=production-ai-fullstack --loc=jamshedpur</p>
+<p class="text-slate-400">&gt; Initializing AstraTech developer kernel...</p>
+<p class="text-hud-green"><span class="text-emerald-400">✔</span> Compiling modules: [PyTorch, FastAPI, Next.js 14, Docker, PostgreSQL]</p>
+<p class="text-slate-300"><span class="text-hud-amber">✔</span> Continuous integration tests: AST Code Analysers ENABLED</p>
+<p class="text-slate-300"><span class="text-hud-cyan">✔</span> Local civic dataset connected: Jamshedpur Municipal Telemetry</p>
+<div class="pt-4 border-t border-slate-800 flex items-center justify-between text-hud-amber">
+<span class="">[KERNEL_STATUS: ACTIVE]</span>
+<span class="text-hud-green animate-pulse">● PORT 3000 ONLINE</span>
+</div>
+</div>
+<div class="lg:col-span-5 relative min-h-[220px] bg-slate-950">
+<div class="absolute inset-0 bg-cover bg-center filter saturate-75 brightness-90" data-alt="A cinematic high-tech developer lab at AstraTech in Jamshedpur with multi-monitor workstation setups displaying code terminals, neural network graphs, and robotic hardware prototypes, low ambient lighting with sharp white and charcoal cybernetic accents." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAa1tj49ijDNKwHDA1_ytoeS-avY5sKjtGw4Pf8p57DtCMr2rqzd_NKZo-xlBXYCpxfy98wS0hfjeG7V9-92HPk0UfA0DlXFgUbuOwUtlbMscvxR8kxqXg1xzCibC7ECUut-G4tpZGc_9m8jhABoFkyYhU1rNwlyJU-aguKvnCEu1mcjB1XL4cBQApedqQh3VYiZgmUPMMsqme9jDiGT0TGWVtrNWTJcWmPlyFi70rn13bRq6mUKK-K");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between font-mono text-[10px]">
+<span class="px-2 py-0.5 bg-black/80 text-hud-amber border border-amber-500/40 rounded">[ASTRATECH HARDWARE &amp; AI LAB]</span>
+<span class="text-slate-300 bg-black/80 px-2 py-0.5 rounded">JSR_OFFLINE_CAMPUS</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- WHO WE ARE // PILLARS SECTION -->
+<section class="w-full py-20 border-b border-border-hud/30 relative">
+<div class="max-w-7xl mx-auto px-4 sm:px-6">
+<div class="flex items-center gap-2 font-mono text-xs text-hud-amber mb-3">
+<span class="">// 01_MISSION_MATRIX</span>
+<div class="h-px flex-1 bg-amber-500/20"></div>
+<span class="text-slate-500">SCHEMATIC: IDENT-01</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-14">
+<div class="lg:col-span-5">
+<h2 class="font-mono text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight">
+          WHO WE ARE?
+        </h2>
+<div class="font-mono text-xs text-hud-amber mt-1">&gt; CODEBASE OVER PAPER CERTS</div>
+</div>
+<div class="lg:col-span-7">
+<p class="text-slate-300 text-base leading-relaxed mb-4">
+          AstraTech AI was created with a vision that technology education should go beyond passive lectures and generic certificates. We build technical intellect, engineering discipline, and the rare ability to turn abstract ideas into production-ready software systems.
+        </p>
+<div class="font-mono text-xs text-slate-400 flex items-center justify-between border-t border-slate-800 pt-3">
+<a class="text-hud-amber hover:underline flex items-center gap-1" href="#vision">
+<span class="">[VIEW_FULL_COLLECTIVE_VISION]</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+<span class="">SYS_ORIGIN: 2024 / JHARKHAND</span>
+</div>
+</div>
+</div>
+<!-- 3 Pillars Blueprint Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- 01 THINK -->
+<div class="corner-bracket bg-surface-card border border-amber-500/30 p-6 flex flex-col justify-between hover:border-hud-amber transition-all">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs text-hud-amber font-bold">[NODE_01 // CORE]</span>
+<span class="material-symbols-outlined text-hud-amber">psychology</span>
+</div>
+<h3 class="font-mono text-xl font-bold text-white uppercase mb-2">01 // THINK</h3>
+<p class="text-sm text-slate-300 leading-relaxed">
+            Develop technical intellect, rigorous computational logic, and deep algorithmic problem-solving ability that scales across distributed systems.
+          </p>
+</div>
+<div class="mt-6 pt-4 border-t border-slate-800/80 font-mono text-[11px] text-hud-amber/80 flex items-center justify-between">
+<span class="">&gt; Logic &amp; First Principles</span>
+<span class="text-slate-500">[ALGO]</span>
+</div>
+</div>
+<!-- 02 BUILD -->
+<div class="corner-bracket bg-surface-card border border-amber-500/30 p-6 flex flex-col justify-between hover:border-hud-amber transition-all">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs text-hud-amber font-bold">[NODE_02 // SYSTEM]</span>
+<span class="material-symbols-outlined text-hud-amber">precision_manufacturing</span>
+</div>
+<h3 class="font-mono text-xl font-bold text-white uppercase mb-2">02 // BUILD</h3>
+<p class="text-sm text-slate-300 leading-relaxed">
+            Turn theoretical knowledge into real, production-ready applications with test coverage, Git versioning, and clean software architecture.
+          </p>
+</div>
+<div class="mt-6 pt-4 border-t border-slate-800/80 font-mono text-[11px] text-hud-amber/80 flex items-center justify-between">
+<span class="">&gt; Production Artifacts</span>
+<span class="text-slate-500">[CI/CD]</span>
+</div>
+</div>
+<!-- 03 CREATE -->
+<div class="corner-bracket bg-surface-card border border-amber-500/30 p-6 flex flex-col justify-between hover:border-hud-amber transition-all">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs text-hud-amber font-bold">[NODE_03 // IMPACT]</span>
+<span class="material-symbols-outlined text-hud-amber">bolt</span>
+</div>
+<h3 class="font-mono text-xl font-bold text-white uppercase mb-2">03 // CREATE</h3>
+<p class="text-sm text-slate-300 leading-relaxed">
+            Apply autonomous AI agents and modern web architectures to solve high-friction municipal, healthcare, and industrial challenges.
+          </p>
+</div>
+<div class="mt-6 pt-4 border-t border-slate-800/80 font-mono text-[11px] text-hud-amber/80 flex items-center justify-between">
+<span class="">&gt; Real-World Deployment</span>
+<span class="text-slate-500">[LIVE]</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TICKER TAPE / TELEMETRY MARQUEE -->
+<div class="w-full bg-[#0a0e17] border-y border-amber-500/30 py-2.5 overflow-hidden font-mono text-xs text-hud-amber select-none">
+<div class="flex whitespace-nowrap items-center gap-8 justify-around opacity-90">
+<span class="">[SYS_TELEMETRY: ACTIVE]</span>
+<span class="text-slate-400">///</span>
+<span class="">JAMSHEDPUR TECH ECOSYSTEM: ADVANCING</span>
+<span class="text-slate-400">///</span>
+<span class="text-emerald-400">CODE FIRST : THEORY SECOND</span>
+<span class="text-slate-400">///</span>
+<span class="">FULLSTACK + GENERATIVE AI TRACKS LIVE</span>
+<span class="text-slate-400">///</span>
+<span class="text-hud-amber font-bold">ASTRAHACK 2026 REGISTRATIONS OPEN</span>
+</div>
+</div>
+<!-- VISION STATEMENT HUD BLOCK -->
+<section class="w-full py-20 border-b border-border-hud/30 bg-[#080b13]" id="vision">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-amber-500/10 border border-amber-500/30 font-mono text-xs text-hud-amber mb-6">
+<span class="">[MANIFESTO // CORE AXIOM]</span>
+</div>
+<blockquote class="font-mono text-2xl sm:text-4xl font-bold text-white uppercase tracking-tight mb-6 leading-tight">
+      “Education should lead to creation — not just certification.”
+    </blockquote>
+<p class="text-slate-300 text-base leading-relaxed max-w-2xl mx-auto">
+      Our vision is to build a generation of technology professionals who don't just memorize frameworks, but know how to think, build, and deploy high-leverage software. We are actively contributing to the technological reinvention of Jamshedpur and the Eastern India tech landscape.
+    </p>
+</div>
+</section>
+<!-- LEADERSHIP HUD // THE PERSON BEHIND ASTRATECH -->
+<!-- WHAT WE TEACH // 6 ENGINE TRACKS -->
+<!-- HOW WE LEARN // 6-STAGE PIPELINE HUD -->
+<section class="w-full py-20 border-b border-border-hud/30 bg-[#080b13]">
+<div class="max-w-7xl mx-auto px-4 sm:px-6">
+<div class="flex items-center gap-2 font-mono text-xs text-hud-amber mb-2">
+<span class="">// 04_PEDAGOGICAL_PIPELINE</span>
+<div class="h-px flex-1 bg-amber-500/20"></div>
+<span class="text-slate-500">[ITERATION_LOOP: L1-L6]</span>
+</div>
+<div class="text-left mb-12">
+<h2 class="font-mono text-3xl font-extrabold text-white uppercase tracking-tight">
+        HOW WE LEARN
+      </h2>
+<p class="font-mono text-xs text-slate-400 mt-1">&gt; AN UNCOMPROMISED ITERATIVE CYCLE DESIGNED TO TRANSITION NOVICES INTO AUTONOMOUS ENGINEERS</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 font-mono">
+<div class="p-4 bg-black/60 border border-slate-800 rounded flex flex-col justify-between hover:border-hud-amber transition-colors">
+<span class="text-hud-amber font-bold text-xl mb-2">01</span>
+<div>
+<h4 class="text-white font-bold text-xs uppercase mb-1">&gt; LEARN</h4>
+<p class="text-[11px] text-slate-400">Build rock-solid theoretical fundamentals from scratch.</p>
+</div>
+</div>
+<div class="p-4 bg-black/60 border border-slate-800 rounded flex flex-col justify-between hover:border-hud-amber transition-colors">
+<span class="text-hud-amber font-bold text-xl mb-2">02</span>
+<div>
+<h4 class="text-white font-bold text-xs uppercase mb-1">&gt; PRACTICE</h4>
+<p class="text-[11px] text-slate-400">Daily coding exercises and deterministic edge-case testing.</p>
+</div>
+</div>
+<div class="p-4 bg-black/60 border border-slate-800 rounded flex flex-col justify-between hover:border-hud-amber transition-colors">
+<span class="text-hud-amber font-bold text-xl mb-2">03</span>
+<div>
+<h4 class="text-white font-bold text-xs uppercase mb-1">&gt; BUILD</h4>
+<p class="text-[11px] text-slate-400">Create production applications solving genuine societal needs.</p>
+</div>
+</div>
+<div class="p-4 bg-black/60 border border-slate-800 rounded flex flex-col justify-between hover:border-hud-amber transition-colors">
+<span class="text-hud-amber font-bold text-xl mb-2">04</span>
+<div>
+<h4 class="text-white font-bold text-xs uppercase mb-1">&gt; DEPLOY</h4>
+<p class="text-[11px] text-slate-400">Take live repos to public cloud endpoints and monitor uptime.</p>
+</div>
+</div>
+<div class="p-4 bg-black/60 border border-slate-800 rounded flex flex-col justify-between hover:border-hud-amber transition-colors">
+<span class="text-hud-amber font-bold text-xl mb-2">05</span>
+<div>
+<h4 class="text-white font-bold text-xs uppercase mb-1">&gt; SHOWCASE</h4>
+<p class="text-[11px] text-slate-400">Maintain an undeniable GitHub record of public commits.</p>
+</div>
+</div>
+<div class="p-4 bg-black/60 border border-slate-800 rounded flex flex-col justify-between hover:border-hud-amber transition-colors">
+<span class="text-hud-amber font-bold text-xl mb-2">06</span>
+<div>
+<h4 class="text-white font-bold text-xs uppercase mb-1">&gt; GROW</h4>
+<p class="text-[11px] text-slate-400">Sharpen system-level mindset and industry leadership.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- MEET THE DEVELOPERS // ROSTER HUD -->
+<!-- BUILT AT ASTRATECH // CAPSTONES HUD -->
+<!-- EVENTS & HACKATHONS // ASTRAHACK 2026 -->
+<section class="w-full py-20 border-b border-border-hud/30" id="events">
+<div class="max-w-7xl mx-auto px-4 sm:px-6">
+<div class="flex items-center gap-2 font-mono text-xs text-hud-amber mb-2">
+<div class="h-px flex-1 bg-amber-500/20"></div>
+</div>
+</div>
+</section>
+<!-- MEDIA GALLERY // INSIDE ASTRATECH -->
+<section class="w-full py-20 border-b border-border-hud/30 bg-[#080b13]" id="media">
+<div class="max-w-7xl mx-auto px-4 sm:px-6">
+<div class="flex items-center gap-2 font-mono text-xs text-hud-amber mb-2">
+<span class="">// 08_FACILITY_TELEMETRY</span>
+<div class="h-px flex-1 bg-amber-500/20"></div>
+<span class="text-slate-500">[OPTICAL_FEED]</span>
+</div>
+<div class="text-left mb-12">
+<h2 class="font-mono text-3xl font-extrabold text-white uppercase tracking-tight">
+        INSIDE ASTRATECH
+      </h2>
+<p class="font-mono text-xs text-slate-400 mt-1">&gt; WHERE THEORETICAL COMPUTATION TRANSFORMS INTO ACTIVE, KEYBOARD-FIRST ENGINEERING</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
+<!-- Media 01 -->
+<div class="corner-bracket bg-surface-card border border-slate-800 overflow-hidden">
+<div class="relative h-60 bg-black">
+<div class="absolute inset-0 bg-cover bg-center filter grayscale contrast-110" data-alt="AstraTech developer lab with clean ergonomic dual-display monitors showing Visual Studio Code, dark cyber-minimalist lab interior in Jamshedpur." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDp5M2mYXhAejNPudvlPRSBPKj-qJa8CHoczC2dgvp7PQpFik6lkshNGqDP9sv5MFawQe3jrIrVYRmigSnyYxY9w2fbhfDJ71herVS6N40_f517dqCgICSJCXsCNmv6oIcYmNu0Cv1ilTZR3OYWq9Y_pbxjhvP0w6nXbAXuF30hbOBNb04bjgwdO4FrcmGHpyMcTFGul0OWZEod8ZwHUypXOmXm_s2M9sXdGzDbqJ_h28bRJT-dyxDG");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+<div class="absolute top-2 left-2 bg-black/80 text-[10px] text-hud-amber px-2 py-0.5 border border-amber-500/30">[FEED_CAM: 01]</div>
+</div>
+<div class="p-3 bg-black/80 flex items-center justify-between border-t border-slate-800 text-[11px]">
+<span class="text-white">[Workstations Lab]</span>
+<span class="text-slate-500">HARDWARE HUB</span>
+</div>
+</div>
+<!-- Media 02 -->
+<div class="corner-bracket bg-surface-card border border-slate-800 overflow-hidden">
+<div class="relative h-60 bg-black">
+<div class="absolute inset-0 bg-cover bg-center filter grayscale contrast-110" data-alt="Intense collaborative whiteboard session at AstraTech with engineers sketching distributed microservice architecture diagrams with hand drawn database nodes." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDoY1OxEWs7TfosQJvrOs4g07kktCLcxvadWdLNNWKen8M_GWsf-snKDohMtObIrtYZSuK_9aUMxWexAAF0H5e-pIO0ClATftNV9t5n2S-IjxW78895X3AhCRPeOAxE4Uqs-dFVW_tyxF32MJJrY9cV2M1ASfou1Aq0mh92o5k1i6D8jePLNRgf_VTS7FpP8cKIXFubTr4vgwa4LZEuNMMguSmzVNFLc413xASaHdK4C9d2wuLO_1qd");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+<div class="absolute top-2 left-2 bg-black/80 text-[10px] text-hud-cyan px-2 py-0.5 border border-cyan-500/30">[FEED_CAM: 02]</div>
+</div>
+<div class="p-3 bg-black/80 flex items-center justify-between border-t border-slate-800 text-[11px]">
+<span class="text-white">[Architecture Session]</span>
+<span class="text-slate-500">DESIGN SPRINTS</span>
+</div>
+</div>
+<!-- Media 03 -->
+<div class="corner-bracket bg-surface-card border border-slate-800 overflow-hidden">
+<div class="relative h-60 bg-black">
+<div class="absolute inset-0 bg-cover bg-center filter grayscale contrast-110" data-alt="Technical mentorship review session at AstraTech with director Aniket Kumar conducting code inspections on a high-resolution projector screen." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC8F1Wc9Q3PQBDP6MxVN16wfuF1F83s6KHgyGrgzuuwnu43eCOAmxJlwee0VWa6VuzOWtZZlTglEQp_ggzHFQWs9LCf1gQbPaAT1gLMm0MkzbCikUGjU0ZUA1JXkTqyMMHnlcqlinR8wF1ugxSx5jZJF-rcatR2QuSw63DhgTH0jy3FJomN1NZUeIWVMXfwWtAivSoDf3Eyrzh6NNXYB2V6JZ2Xvz6Qp00v_qoHvSXbdbNfnnM-xg6S");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+<div class="absolute top-2 left-2 bg-black/80 text-[10px] text-hud-green px-2 py-0.5 border border-emerald-500/30">[FEED_CAM: 03]</div>
+</div>
+<div class="p-3 bg-black/80 flex items-center justify-between border-t border-slate-800 text-[11px]">
+<span class="text-white">[Founder Technical Review]</span>
+<span class="text-slate-500">PEER AUDIT</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- WHY ASTRATECH // 5 TACTICAL ADVANTAGES -->
+<section class="w-full py-20 border-b border-border-hud/30" id="about">
+<div class="max-w-7xl mx-auto px-4 sm:px-6">
+<div class="flex items-center gap-2 font-mono text-xs text-hud-amber mb-2">
+<span class="">// 09_COMPETITIVE_ADVANTAGE</span>
+<div class="h-px flex-1 bg-amber-500/20"></div>
+<span class="text-slate-500">[5 VECTORS]</span>
+</div>
+<div class="text-left mb-12">
+<h2 class="font-mono text-3xl font-extrabold text-white uppercase tracking-tight">
+        WHY ASTRATECH?
+      </h2>
+<p class="font-mono text-xs text-slate-400 mt-1">&gt; ENGINEERED TO DISMANTLE PASSIVE EDUCATIONAL HABITS AND BUILD RELENTLESS BUILDER INSTINCTS</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-4 font-mono">
+<div class="corner-bracket bg-surface-card border border-slate-800 p-5 flex flex-col justify-between hover:border-hud-amber transition-all">
+<span class="text-hud-amber font-bold text-lg mb-4">01</span>
+<div>
+<h4 class="text-white font-bold text-xs uppercase mb-1">&gt; LEARN BY BUILDING</h4>
+<p class="text-[11px] text-slate-400">Zero dry lectures; 100% of curriculum executed inside Git repos.</p>
+</div>
+</div>
+<div class="corner-bracket bg-surface-card border border-slate-800 p-5 flex flex-col justify-between hover:border-hud-amber transition-all">
+<span class="text-hud-amber font-bold text-lg mb-4">02</span>
+<div>
+<h4 class="text-white font-bold text-xs uppercase mb-1">&gt; GROW TOGETHER</h4>
+<p class="text-[11px] text-slate-400">Collaborate with peers who push standards higher every week.</p>
+</div>
+</div>
+<div class="corner-bracket bg-surface-card border border-slate-800 p-5 flex flex-col justify-between hover:border-hud-amber transition-all">
+<span class="text-hud-amber font-bold text-lg mb-4">03</span>
+<div>
+<h4 class="text-white font-bold text-xs uppercase mb-1">&gt; PUSH LIMITS</h4>
+<p class="text-[11px] text-slate-400">Tackle complex architectural challenges beyond standard coursework.</p>
+</div>
+</div>
+<div class="corner-bracket bg-surface-card border border-slate-800 p-5 flex flex-col justify-between hover:border-hud-amber transition-all">
+<span class="text-hud-amber font-bold text-lg mb-4">04</span>
+<div>
+<h4 class="text-white font-bold text-xs uppercase mb-1">&gt; CREATE IMPACT</h4>
+<p class="text-[11px] text-slate-400">Solve localized municipal and regional industrial friction in Jamshedpur.</p>
+</div>
+</div>
+<div class="corner-bracket bg-surface-card border border-slate-800 p-5 flex flex-col justify-between hover:border-hud-amber transition-all">
+<span class="text-hud-amber font-bold text-lg mb-4">05</span>
+<div>
+<h4 class="text-white font-bold text-xs uppercase mb-1">&gt; PORTFOLIO READY</h4>
+<p class="text-[11px] text-slate-400">Graduate with public GitHub repositories, deployed URLs, and verified tests.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- REAL STORIES COHORT PLACEHOLDER -->
+<!-- READY TO BUILD // CALL TO ACTION -->
+<section class="w-full py-20 border-b border-border-hud/30 relative" id="join">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
+<div class="inline-block font-mono text-xs text-hud-amber bg-amber-500/10 px-3 py-1 rounded border border-amber-500/30 mb-4">
+      [ENROLLMENT_GATEWAY // COHORT 2026]
+    </div>
+<h2 class="font-mono text-3xl sm:text-5xl font-extrabold text-white uppercase tracking-tight mb-4">
+      READY TO BUILD WITH US?
+    </h2>
+<p class="text-slate-300 text-base max-w-xl mx-auto mb-8">
+      Become part of a growing collective of technical intellects, systems builders, and pragmatic problem-solvers in Jamshedpur.
+    </p>
+<a class="inline-flex items-center gap-2 px-8 py-3.5 bg-hud-amber text-black font-mono text-xs font-bold uppercase rounded hover:bg-hud-amber-light shadow-[0_0_25px_rgba(245,158,11,0.4)] transition-all" href="#contact">
+<span class="">&gt; APPLY TO COHORT</span>
+<span class="material-symbols-outlined text-[16px]">north_east</span>
+</a>
+</div>
+</section>
+<!-- CONTACT / ADMISSIONS TERMINAL -->
+<section class="w-full py-20 border-b border-border-hud/30 bg-[#080b13]" id="contact">
+<div class="max-w-7xl mx-auto px-4 sm:px-6">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<!-- Contact Info Left -->
+<div class="lg:col-span-5 flex flex-col justify-between font-mono">
+<div>
+<div class="text-xs text-hud-amber mb-2">// 10_DIRECT_DESK</div>
+<h2 class="text-3xl font-extrabold text-white uppercase tracking-tight mb-4">
+            HAVE A QUESTION?
+          </h2>
+<p class="text-slate-400 font-sans text-sm leading-relaxed mb-8">
+            Whether you are an aspiring builder seeking admission, a college student looking for real technical intellect, or an industry firm looking to hire our vetted developers, we respond directly.
+          </p>
+<div class="space-y-4 text-xs">
+<div class="p-3 bg-black/60 border border-slate-800 rounded">
+<span class="text-hud-amber block mb-1">[PHYSICAL_CAMPUS]</span>
+<span class="text-white">AstraTech AI Lab, Bistupur, Jamshedpur, Jharkhand — 831001</span>
+</div>
+<div class="p-3 bg-black/60 border border-slate-800 rounded">
+<span class="text-hud-green block mb-1">[OFFICIAL_COMMUNICATIONS]</span>
+<span class="text-white">admissions@astratech.ai • director@astratech.ai</span>
+</div>
+<div class="p-3 bg-black/60 border border-slate-800 rounded">
+<span class="text-hud-cyan block mb-1">[WHATSAPP_HOTLINE]</span>
+<span class="text-white">+91 (Admissions Hotline Active)</span>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-slate-800 mt-6 text-[11px] text-slate-500">
+          [STATUS: ADMISSIONS DESK OPEN (MON - SAT) // UTC+05:30]
+        </div>
+</div>
+<!-- Contact Terminal Form -->
+<div class="lg:col-span-7">
+<div class="corner-bracket bg-surface-card border border-amber-500/40 p-6 md:p-8">
+<div class="font-mono text-xs text-hud-amber mb-4 pb-2 border-b border-slate-800 flex items-center justify-between">
+<span class="">[TERMINAL_INPUT: ADMISSION_QUERY]</span>
+<span class="text-slate-500">SEC_CHANNEL_01</span>
+</div>
+<form class="space-y-4 font-mono text-xs" onsubmit="event.preventDefault(); alert('Official enquiry received. AstraTech Admissions will review your profile.');">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-slate-400 mb-1">&gt; FULL_NAME *</label>
+<input class="w-full bg-black/80 border border-slate-700 text-white px-3 py-2.5 rounded focus:border-hud-amber focus:ring-0 outline-none" placeholder="e.g. Rahul Sharma" required="" type="text"/>
+</div>
+<div>
+<label class="block text-slate-400 mb-1">&gt; EMAIL_ADDRESS *</label>
+<input class="w-full bg-black/80 border border-slate-700 text-white px-3 py-2.5 rounded focus:border-hud-amber focus:ring-0 outline-none" placeholder="rahul@example.com" required="" type="email"/>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-slate-400 mb-1">&gt; PHONE_NUMBER *</label>
+<input class="w-full bg-black/80 border border-slate-700 text-white px-3 py-2.5 rounded focus:border-hud-amber focus:ring-0 outline-none" placeholder="+91 XXXXX XXXXX" required="" type="tel"/>
+</div>
+<div>
+<label class="block text-slate-400 mb-1">&gt; BACKGROUND_CATEGORY *</label>
+<select class="w-full bg-black/80 border border-slate-700 text-white px-3 py-2.5 rounded focus:border-hud-amber focus:ring-0 outline-none">
+<option>College Student (Engineering)</option>
+<option>College Student (Other Track)</option>
+<option>Working Professional</option>
+<option>Independent Builder</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-slate-400 mb-1">&gt; PROGRAM_OF_INTEREST *</label>
+<select class="w-full bg-black/80 border border-slate-700 text-white px-3 py-2.5 rounded focus:border-hud-amber focus:ring-0 outline-none">
+<option>01 Full Stack Development (MERN / Next.js)</option>
+<option>02 Artificial Intelligence (LLMs / PyTorch)</option>
+<option>03 Programming &amp; DSA (Algorithms)</option>
+<option>04 Data Analytics (SQL / Python / BI)</option>
+<option>05 Cloud &amp; DevOps (AWS / Docker)</option>
+<option>06 UI/UX &amp; Product Design</option>
+</select>
+</div>
+<div>
+<label class="block text-slate-400 mb-1">&gt; QUESTIONS_OR_GOALS</label>
+<textarea class="w-full bg-black/80 border border-slate-700 text-white p-3 rounded focus:border-hud-amber focus:ring-0 outline-none" placeholder="Tell us what you want to build and your expectations..." rows="3"></textarea>
+</div>
+<button class="w-full py-3 bg-hud-amber text-black font-bold uppercase rounded hover:bg-hud-amber-light transition-all flex items-center justify-center gap-2" type="submit">
+<span class="">[TRANSMIT_OFFICIAL_ENQUIRY]</span>
+<span class="material-symbols-outlined text-[16px]">send</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- REGIONAL MAP // HUD LOCATION SCHEMATIC -->
+</main>
+<!-- HUD FOOTER -->
+<footer class="w-full bg-[#05070c] border-t border-border-hud/40 py-12 font-mono text-xs text-slate-400"><div class="max-w-7xl mx-auto px-4 sm:px-6">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-slate-800">
+<div class="md:col-span-5 space-y-3">
+<div class="flex items-center gap-2 text-white font-bold text-sm">
+<span class="w-5 h-5 rounded border border-hud-amber text-hud-amber flex items-center justify-center text-[10px]">&gt;</span>
+<span class="">ASTRATECH AI // SYSTEMS LAB</span>
+</div>
+<p class="text-slate-500 font-sans text-xs max-w-sm">
+        Learn. Build. Deploy. Grow. Developing the engineering vanguard of Jamshedpur &amp; Eastern India.
+      </p>
+<div class="flex items-center gap-3 pt-2">
+<a class="w-7 h-7 rounded border border-slate-800 bg-black flex items-center justify-center text-slate-400 hover:text-hud-amber hover:border-hud-amber transition-all" href="#"><span class="material-symbols-outlined text-[14px]">photo_camera</span></a>
+<a class="w-7 h-7 rounded border border-slate-800 bg-black flex items-center justify-center text-slate-400 hover:text-hud-amber hover:border-hud-amber transition-all" href="#"><span class="material-symbols-outlined text-[14px]">share</span></a>
+<a class="w-7 h-7 rounded border border-slate-800 bg-black flex items-center justify-center text-slate-400 hover:text-hud-amber hover:border-hud-amber transition-all" href="#"><span class="material-symbols-outlined text-[14px]">terminal</span></a>
+<a class="w-7 h-7 rounded border border-slate-800 bg-black flex items-center justify-center text-slate-400 hover:text-hud-amber hover:border-hud-amber transition-all" href="#"><span class="material-symbols-outlined text-[14px]">smart_display</span></a>
+<a class="w-7 h-7 rounded border border-slate-800 bg-black flex items-center justify-center text-slate-400 hover:text-hud-amber hover:border-hud-amber transition-all" href="#"><span class="material-symbols-outlined text-[14px]">chat</span></a>
+</div>
+</div>
+<div class="md:col-span-4 space-y-2">
+<span class="text-hud-amber font-bold block mb-2">[SECTIONS_INDEX]</span>
+<div class="grid grid-cols-2 gap-2 text-[11px]">
+<a class="hover:text-hud-amber transition-colors" data-path="about" href="/about">// ABOUT</a>
+<a class="hover:text-hud-amber transition-colors" data-path="courses" href="/courses">// COURSES</a>
+<a class="hover:text-hud-amber transition-colors" data-path="developers" href="/about">// DEVELOPERS</a>
+<a class="hover:text-hud-amber transition-colors" data-path="projects" href="/projects">// PROJECTS</a>
+<a class="hover:text-hud-amber transition-colors" data-path="events" href="#">// EVENTS</a>
+<a class="hover:text-hud-amber transition-colors" data-path="media" href="#">// MEDIA</a>
+<a class="hover:text-hud-amber transition-colors" data-path="contact" href="#">// CONTACT</a>
+</div>
+</div>
+<div class="md:col-span-3 space-y-2">
+<span class="text-hud-amber font-bold block mb-2">[REGULATORY]</span>
+<div class="flex flex-col gap-1.5 text-[11px]">
+<a class="hover:text-hud-amber transition-colors" data-path="privacy-policy" href="#">// PRIVACY_POLICY</a>
+<a class="hover:text-hud-amber transition-colors" data-path="terms" href="#">// TERMS_OF_SERVICE</a>
+<a class="hover:text-hud-amber transition-colors" data-path="refund-policy" href="#">// REFUND_POLICY</a>
+</div>
+</div>
+</div>
+<div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500">
+<span class="">© AstraTech AI. Jamshedpur, Jharkhand. All systems operational.</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-hud-green animate-ping"></span>
+<span class="text-hud-green font-bold">[NODE_STATUS: ONLINE]</span>
+</div>
+</div>
+</div></footer>
+</body></html>
+

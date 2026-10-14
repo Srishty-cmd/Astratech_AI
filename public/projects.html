@@ -1,0 +1,531 @@
+<!-- AstraTech AI — Projects (Editorial Showcase) -->
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="web_standard" name="shell-type">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"surface-base": "#05070C", "surface-card": "#0A0E17", "surface-container": "#1d2024", "surface-elevated": "#121927", "border-subtle": "rgba(255, 255, 255, 0.08)", "border-strong": "rgba(255, 255, 255, 0.16)", "amber-brand": "#F5A400", "amber-glow": "#FFB020", "amber-muted": "rgba(245, 164, 0, 0.12)", "text-primary": "#F1F5F9", "text-secondary": "#94A3B8", "text-muted": "#64748B", "silver-metallic": "#CBD5E1", "surface-container-highest": "#32353a", "on-secondary": "#2b3136", surface: "#111318", "on-secondary-fixed-variant": "#41484c", "on-primary": "#2d3137", "primary-container": "#0d1117", "surface-container-high": "#272a2f", "surface-bright": "#37393e", "secondary-fixed-dim": "#c1c7cd", "on-secondary-container": "#b3b9bf", "primary-fixed": "#dfe2eb", "on-tertiary": "#3a2e26", "on-primary-container": "#797d85", error: "#ffb4ab", "tertiary-container": "#180f08", outline: "#8f9095", "inverse-primary": "#5b5e66", "error-container": "#93000a", "surface-tint": "#c3c6cf", "surface-dim": "#111318", "on-primary-fixed": "#181c22", "on-primary-fixed-variant": "#43474e", "outline-variant": "#45474b", "tertiary-fixed-dim": "#d6c3b7", "primary-fixed-dim": "#c3c6cf", background: "#111318", "surface-container-lowest": "#0c0e13", "surface-container-low": "#191c20", "on-background": "#e1e2e9", "secondary-container": "#434a4f", primary: "#c3c6cf", "on-tertiary-container": "#897a6f", "on-error-container": "#ffdad6", "on-surface": "#e1e2e9", "on-secondary-fixed": "#161c21", "tertiary-fixed": "#f3dfd2", "surface-variant": "#32353a", "on-tertiary-fixed": "#231a12", "inverse-on-surface": "#2e3035", tertiary: "#d6c3b7", "on-tertiary-fixed-variant": "#51443b", "on-error": "#690005", secondary: "#c1c7cd", "on-surface-variant": "#c6c6cb", "secondary-fixed": "#dde3e9", "inverse-surface": "#e1e2e9"}, fontFamily: {"display-vt": ["\"VT323\"", "monospace"], mono: ["\"JetBrains Mono\"", "\"Space Grotesk\"", "monospace"], sans: ["\"Space Grotesk\"", "system-ui", "sans-serif"], headline: ["Sora"], display: ["Sora"], body: ["Space Grotesk"], label: ["Space Grotesk"]}, fontSize: {}, borderRadius: {DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px"}}}};</script>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #05070C;
+        color: #F1F5F9;
+      }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+</head>
+<body class="bg-surface-base font-sans text-text-primary antialiased selection:bg-amber-brand selection:text-surface-base min-h-screen flex flex-col justify-between">
+<!-- TOP TELEMETRY PROTOCOL TICKER & NAVBAR -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#05070C]/90 backdrop-blur-xl border-b border-white/10">
+  <!-- Top Telemetry Protocol Ticker -->
+  <div class="w-full border-b border-white/[0.08] bg-[#030508] px-4 sm:px-8 py-1">
+    <div class="max-w-7xl mx-auto flex items-center justify-between font-mono text-[10px] tracking-widest text-text-muted">
+      <div class="flex items-center gap-3">
+        <span class="flex items-center gap-1.5 text-text-primary">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#f59e0b] animate-pulse"></span>
+          [SYS_STATUS: <span class="text-[#f59e0b]">NOMINAL</span> // FEED: <span class="text-white">99.8%</span>]
+        </span>
+        <span class="hidden sm:inline text-white/20">|</span>
+        <span class="hidden sm:inline text-slate-400">[LAT: 22.8046° N // LON: 86.2029° E]</span>
+        <span class="hidden lg:inline text-white/20">|</span>
+        <span class="hidden lg:inline text-text-muted">[REGION: JAMSHEDPUR, JHARKHAND - NODE_01]</span>
+      </div>
+      <div class="flex items-center gap-4 text-[10px]">
+        <span class="hidden md:inline text-slate-400">[DEP_AUTH: PROTOCOL_L5]</span>
+        <span class="hidden md:inline text-white/20">|</span>
+        <span class="text-[#f59e0b] font-medium">CLK: UTC+05:30</span>
+      </div>
+    </div>
+  </div>
+  <!-- Main Navigation Bar -->
+  <div class="h-16 max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
+    <div class="flex items-center gap-6">
+      <a class="flex flex-col group" data-path="home" href="/">
+        <div class="flex items-center gap-2">
+          <span class="font-mono text-base font-bold tracking-tight text-white group-hover:text-[#f59e0b] transition-colors">ASTRATECH AI</span>
+          <span class="px-1.5 py-0.5 rounded bg-amber-brand/10 text-[#f59e0b] font-mono text-[10px] font-semibold border border-[#f59e0b]/40">AI.0</span>
+        </div>
+        <span class="font-mono text-[9px] text-text-muted tracking-widest uppercase">// JAMSHEDPUR LAB</span>
+      </a>
+    </div>
+    <!-- Nav Links -->
+    <nav class="hidden xl:flex items-center gap-1">
+      <a class="px-3 py-1.5 font-mono text-xs text-slate-300 hover:text-white transition-colors tracking-wider uppercase" data-path="home" href="/">// HOME</a>
+      <a class="px-3 py-1.5 font-mono text-xs text-slate-300 hover:text-white transition-colors tracking-wider uppercase" data-path="about" href="/about">// ABOUT</a>
+      <a class="px-3 py-1.5 font-mono text-xs text-slate-300 hover:text-white transition-colors tracking-wider uppercase" data-path="courses" href="/courses">// COURSES</a>
+      <a aria-current="page" class="px-3 py-1.5 font-mono text-xs text-[#f59e0b] font-medium tracking-wider uppercase flex items-center gap-1.5" data-path="projects" href="/projects"><span class="h-1.5 w-1.5 rounded-full bg-[#f59e0b] animate-pulse"></span>// PROJECTS</a>
+      <a class="px-3 py-1.5 font-mono text-xs text-slate-300 hover:text-white transition-colors tracking-wider uppercase" data-path="developers" href="/about">// DEVELOPERS</a>
+      <a class="px-3 py-1.5 font-mono text-xs text-slate-300 hover:text-white transition-colors tracking-wider uppercase" data-path="media" href="/#media">// MEDIA</a>
+      <a class="px-3 py-1.5 font-mono text-xs text-slate-300 hover:text-white transition-colors tracking-wider uppercase" data-path="contact" href="/#contact">// CONTACT</a>
+    </nav>
+    <!-- Right CTAs -->
+    <div class="flex items-center gap-3">
+      <a class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-sm bg-amber-brand/10 border border-[#f59e0b]/40 text-[#f59e0b] font-mono text-xs font-semibold tracking-wider hover:bg-[#f59e0b] hover:text-black transition-all duration-200" data-path="enrollment" href="/#join">
+        [INIT_ENROLL] ⚡
+      </a>
+      <div class="w-8 h-8 rounded bg-surface-elevated border border-white/10 flex items-center justify-center text-slate-300 font-mono text-xs font-medium">
+        01
+      </div>
+    </div>
+  </div>
+</header>
+<!-- MAIN EDITORIAL CONTENT -->
+<main class="w-full pt-28 pb-20 bg-surface-base relative overflow-hidden">
+<!-- Ambient Technical Grid Pattern & Subtle Glows -->
+<div class="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(245,164,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(245,164,0,0.03)_1px,transparent_1px)] [background-size:32px_32px]"></div>
+<div class="pointer-events-none absolute -top-40 right-1/4 w-[500px] h-[500px] rounded-full bg-amber-brand/5 blur-[140px]"></div>
+<div class="pointer-events-none absolute top-[1200px] -left-40 w-[600px] h-[600px] rounded-full bg-[#182035]/30 blur-[160px]"></div>
+<!-- 01 — HERO SECTION -->
+<section class="relative w-full max-w-7xl mx-auto px-4 sm:px-8 pt-12 pb-20 md:pt-16 md:pb-24">
+<div class="flex flex-col gap-4 border-b border-white/10 pb-16">
+<div class="flex items-center gap-3 font-mono text-xs text-amber-brand">
+<span class="px-2.5 py-1 rounded bg-amber-brand/10 border border-amber-brand/30 tracking-widest uppercase font-semibold">
+            [ PROJECTS / ASTRA BUILDS ]
+          </span>
+<span class="text-text-muted">// PRODUCTION DIRECTORY</span>
+</div>
+<div class="mt-2"><h1 class="font-display-vt text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white tracking-tight leading-none uppercase">BUILT BY <span class="text-[#f59e0b]">ASTRATECH</span></h1><p class="font-mono text-xl sm:text-2xl text-[#f59e0b] mt-4 tracking-wide font-normal">Real projects. Real builders. Real learning.</p><p class="text-slate-400 text-base sm:text-lg max-w-2xl mt-3 leading-relaxed font-sans">Explore what students are building while turning their learning into working products. Deployed from raw prototypes directly to high-reliability production nodes.</p></div>
+</div>
+</section>
+<!-- 02 — FEATURED BUILDS (Alternating Large Editorial Rhythm) -->
+<section class="relative w-full max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-28 md:space-y-36">
+<div class="flex items-center justify-between border-b border-white/10 pb-6">
+<div class="space-y-1">
+<span class="font-mono text-xs text-amber-brand tracking-widest block uppercase">[ FEATURED PROJECTS ]</span>
+<h2 class="font-display-vt text-4xl sm:text-5xl text-white tracking-tight uppercase">
+            WHAT THEY'RE BUILDING<span class="text-amber-brand">.</span>
+</h2>
+</div>
+<div class="hidden sm:flex items-center gap-2 font-mono text-xs text-text-muted">
+<span class="h-2 w-2 rounded-full bg-amber-brand animate-pulse"></span>
+<span class="">LIVE PRODUCTION VERIFIED</span>
+</div>
+</div>
+<!-- BUILD 01 (Left: Visual, Right: Text) -->
+<article class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+<!-- Visual Container -->
+<div class="lg:col-span-7 group relative rounded-xl overflow-hidden bg-surface-card border border-white/10 hover:border-amber-brand/40 transition-all duration-500 shadow-2xl">
+<div class="relative w-full aspect-[16/10] bg-[#070A10] overflow-hidden">
+<img class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700" data-alt="Technical telemetry and IoT sensor dashboard showing municipal air quality index real-time graphs, map points for Jamshedpur industrial grid, dark cyber aesthetic, high contrast amber accents, micro data charts" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHJ7QdW0UoZA7vz9pWtSke3Cf_9o4ygoGW_-M7S08CwCfJ6pD3BbY-Gwr-N0dd6N8Hi7IEtn-CBqbbA5JvY9D8haFBrQKvbR8GnZSfwNGQ4RI1IxTD5vDFX1lMJ7YSKGzRLnn_2u-bpOMzsMzrPHq4BSPsUZ49_v9edgZ_yLBz1xakNeafgsZVBJ1nS8WqXohFinBEMdXRU2TodHqdgrHER0tdQb6IiqCEm7SAG4U">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-card/80 via-transparent to-transparent"></div>
+<!-- Technical Tag Overlay -->
+<div class="absolute top-4 left-4 font-mono text-[11px] px-2.5 py-1 rounded bg-[#05070C]/90 border border-white/10 text-silver-metallic backdrop-blur-md">
+<span class="text-amber-brand">[ NODE: JH-01 ]</span> SENSOR INGEST STREAM
+            </div>
+<div class="absolute bottom-4 right-4 font-mono text-[11px] px-2.5 py-1 rounded bg-[#05070C]/90 border border-amber-brand/30 text-amber-brand backdrop-blur-md flex items-center gap-1.5">
+<span class="h-1.5 w-1.5 rounded-full bg-amber-brand animate-ping"></span> LIVE CLUSTER
+            </div>
+</div>
+</div>
+<!-- Editorial Details -->
+<div class="lg:col-span-5 flex flex-col justify-center space-y-5">
+<div class="flex items-center gap-3 font-mono text-xs">
+<span class="text-amber-brand font-bold">[ PROJECT / 001 ]</span>
+<span class="text-white/20">|</span>
+<span class="text-text-muted">COHORT 2025</span>
+</div>
+<h3 class="font-display-vt text-3xl sm:text-4xl text-white tracking-wide uppercase leading-tight">
+            MUNICIPAL SENSOR TELEMETRY HUB
+          </h3>
+<p class="text-text-secondary text-sm sm:text-base leading-relaxed font-sans">
+            Real-time municipal telemetry ingestion pipeline tracking air quality, industrial emission levels, and municipal water flow across Jamshedpur industrial zones.
+          </p>
+<div class="py-3 border-y border-white/[0.08] space-y-2 font-mono text-xs">
+<div class="flex items-center justify-between">
+<span class="text-text-muted uppercase">BUILT BY</span>
+<span class="text-text-primary font-medium">Aman Sharma</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-text-muted uppercase">PROGRAM</span>
+<span class="text-amber-brand font-medium">FDE Engine</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-text-muted uppercase">TECH</span>
+<span class="text-silver-metallic font-medium">React · Node.js · PostgreSQL · WebSockets</span>
+</div>
+</div>
+<!-- Clean 2 Action Buttons -->
+<div class="flex flex-wrap items-center gap-3 pt-2"><a class="inline-flex items-center justify-center px-5 py-2.5 rounded-sm bg-[#f59e0b] hover:bg-[#d97706] text-black font-mono text-xs font-bold tracking-wider transition-all duration-200 shadow-[0_0_16px_rgba(245,158,11,0.25)] hover:scale-[1.02]" href="#">[ LIVE PROJECT → ]</a><a class="inline-flex items-center justify-center px-5 py-2.5 rounded-sm bg-transparent border border-white/20 hover:border-[#f59e0b] text-slate-300 hover:text-white font-mono text-xs font-medium tracking-wider transition-all duration-200" href="#">[ GITHUB → ]</a></div>
+</div>
+</article>
+<!-- BUILD 02 (REVERSED: Text on Left, Visual on Right) -->
+<article class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+<!-- Editorial Details (Appears first on desktop) -->
+<div class="lg:col-span-5 flex flex-col justify-center space-y-5 order-2 lg:order-1">
+<div class="flex items-center gap-3 font-mono text-xs">
+<span class="text-amber-brand font-bold">[ PROJECT / 002 ]</span>
+<span class="text-white/20">|</span>
+<span class="text-text-muted">NEURAL WORKSPACE</span>
+</div>
+<h3 class="font-display-vt text-3xl sm:text-4xl text-white tracking-wide uppercase leading-tight">
+            ASTRA-AGENT: LEGAL ASSISTANT
+          </h3>
+<p class="text-text-secondary text-sm sm:text-base leading-relaxed font-sans">
+            Retrieval-augmented conversational agent designed to index, parse, and summarize complex regional land and legal compliance documents in Hindi and English.
+          </p>
+<div class="py-3 border-y border-white/[0.08] space-y-2 font-mono text-xs">
+<div class="flex items-center justify-between">
+<span class="text-text-muted uppercase">BUILT BY</span>
+<span class="text-text-primary font-medium">Priya Kumari</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-text-muted uppercase">PROGRAM</span>
+<span class="text-amber-brand font-medium">AIML Track</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-text-muted uppercase">TECH</span>
+<span class="text-silver-metallic font-medium">FastAPI · Python · LangChain · pgvector</span>
+</div>
+</div>
+<!-- Clean 2 Action Buttons -->
+<div class="flex flex-wrap items-center gap-3 pt-2"><a class="inline-flex items-center justify-center px-5 py-2.5 rounded-sm bg-[#f59e0b] hover:bg-[#d97706] text-black font-mono text-xs font-bold tracking-wider transition-all duration-200 shadow-[0_0_16px_rgba(245,158,11,0.25)] hover:scale-[1.02]" href="#">[ LIVE PROJECT → ]</a><a class="inline-flex items-center justify-center px-5 py-2.5 rounded-sm bg-transparent border border-white/20 hover:border-[#f59e0b] text-slate-300 hover:text-white font-mono text-xs font-medium tracking-wider transition-all duration-200" href="#">[ GITHUB → ]</a></div>
+</div>
+<!-- Visual Container -->
+<div class="lg:col-span-7 group relative rounded-xl overflow-hidden bg-surface-card border border-white/10 hover:border-amber-brand/40 transition-all duration-500 shadow-2xl order-1 lg:order-2">
+<div class="relative w-full aspect-[16/10] bg-[#070A10] overflow-hidden">
+<img class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700" data-alt="Technical user interface mockup of a bilingual AI legal assistant showing retrieval augmented generation vectors, chat transcripts in Hindi and English, sleek dark cybersecurity theme with amber highlighted code markers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLBtln-mCQfuego-rgDnB2yzKi31jKD32gmX4ak1s8sZvQATEK58fEb2lCEuLKWLdfWrwna1Q4OEPZf9gPZVV1OC8TU_aqCRihcuAnyfgSsgiibuTZvKXyYlkv_R1_GVOkZt3K4X3ZiPGJpijkPBnnuBdomZJgQuZfKgM1kTIgImga-3KL_Avviq_wpQhLGr8EM9s_AV0IRHhIeFUUqjzuuk9B_OV461tGaK0-sWA">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-card/80 via-transparent to-transparent"></div>
+<!-- Technical Tag Overlay -->
+<div class="absolute top-4 left-4 font-mono text-[11px] px-2.5 py-1 rounded bg-[#05070C]/90 border border-white/10 text-silver-metallic backdrop-blur-md">
+<span class="text-amber-brand">[ RAG MODEL ]</span> BGE-M3 DUAL PIPELINE
+            </div>
+<div class="absolute bottom-4 right-4 font-mono text-[11px] px-2.5 py-1 rounded bg-[#05070C]/90 border border-amber-brand/30 text-amber-brand backdrop-blur-md flex items-center gap-1.5">
+<span class="h-1.5 w-1.5 rounded-full bg-amber-brand animate-ping"></span> EMBEDDINGS ACTIVE
+            </div>
+</div>
+</div>
+</article>
+<!-- BUILD 03 (Normal: Visual on Left, Text on Right) -->
+<article class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+<!-- Visual Container -->
+<div class="lg:col-span-7 group relative rounded-xl overflow-hidden bg-surface-card border border-white/10 hover:border-amber-brand/40 transition-all duration-500 shadow-2xl">
+<div class="relative w-full aspect-[16/10] bg-[#070A10] overflow-hidden">
+<img class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700" data-alt="Developer portal dashboard terminal showing automated security scanning reports, AST code tree, Git pull request diffs, code lint analysis in dark minimalist futuristic style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVwiX22i6pLJe8n_Z0MkGIHhJ61oLPhGTK-luuh1j3ZoHKK3HKDQHTb96dD2TBsSjcCwxv_nCaEhleg2sOYO8M1PaG3F_SaIv3L9j-tJ0Qk_Jr5iFeiHAcOxn-8GeW2EcFQaUMVPdBMDUBdKdd6A8tUxNc2tlbeaTXguAzS68hH1V6H8Nc1W8RM85GC1R7c0KPphm6Cy-G1rSIjBUKm6wJUYO18B76b06n_eiA1-Q">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-card/80 via-transparent to-transparent"></div>
+<!-- Technical Tag Overlay -->
+<div class="absolute top-4 left-4 font-mono text-[11px] px-2.5 py-1 rounded bg-[#05070C]/90 border border-white/10 text-silver-metallic backdrop-blur-md">
+<span class="text-amber-brand">[ AST PARSER ]</span> SEC_SCAN RUNTIME
+            </div>
+<div class="absolute bottom-4 right-4 font-mono text-[11px] px-2.5 py-1 rounded bg-[#05070C]/90 border border-amber-brand/30 text-amber-brand backdrop-blur-md flex items-center gap-1.5">
+<span class="h-1.5 w-1.5 rounded-full bg-amber-brand animate-ping"></span> SUB-SECOND AUDIT
+            </div>
+</div>
+</div>
+<!-- Editorial Details -->
+<div class="lg:col-span-5 flex flex-col justify-center space-y-5">
+<div class="flex items-center gap-3 font-mono text-xs">
+<span class="text-amber-brand font-bold">[ PROJECT / 003 ]</span>
+<span class="text-white/20">|</span>
+<span class="text-text-muted">CI/CD DEVTOOL</span>
+</div>
+<h3 class="font-display-vt text-3xl sm:text-4xl text-white tracking-wide uppercase leading-tight">
+            DEVFLOW: CODE REVIEW ENGINE
+          </h3>
+<p class="text-text-secondary text-sm sm:text-base leading-relaxed font-sans">
+            Automated code analysis tool running static linting and security vulnerability scanning on pull requests with sub-second latency metric logs.
+          </p>
+<div class="py-3 border-y border-white/[0.08] space-y-2 font-mono text-xs">
+<div class="flex items-center justify-between">
+<span class="text-text-muted uppercase">BUILT BY</span>
+<span class="text-text-primary font-medium">Rohan Gupta</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-text-muted uppercase">PROGRAM</span>
+<span class="text-amber-brand font-medium">FDE Cohort</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-text-muted uppercase">TECH</span>
+<span class="text-silver-metallic font-medium">TypeScript · Docker · Redis · Tailwind</span>
+</div>
+</div>
+<!-- Clean 2 Action Buttons -->
+<div class="flex flex-wrap items-center gap-3 pt-2"><a class="inline-flex items-center justify-center px-5 py-2.5 rounded-sm bg-[#f59e0b] hover:bg-[#d97706] text-black font-mono text-xs font-bold tracking-wider transition-all duration-200 shadow-[0_0_16px_rgba(245,158,11,0.25)] hover:scale-[1.02]" href="#">[ LIVE PROJECT → ]</a><a class="inline-flex items-center justify-center px-5 py-2.5 rounded-sm bg-transparent border border-white/20 hover:border-[#f59e0b] text-slate-300 hover:text-white font-mono text-xs font-medium tracking-wider transition-all duration-200" href="#">[ GITHUB → ]</a></div>
+</div>
+</article>
+</section>
+<!-- 03 — STUDENT PROJECTS (Clean, Spacious 2-Column Grid) -->
+<section class="relative w-full max-w-7xl mx-auto px-4 sm:px-8 pt-28 pb-16">
+<div class="flex flex-col gap-2 mb-12 border-b border-white/10 pb-6">
+<span class="font-mono text-xs text-amber-brand tracking-widest uppercase block">[ MORE BUILDS ]</span>
+<h2 class="font-display-vt text-4xl sm:text-5xl text-white tracking-tight uppercase">
+          MORE FROM THE COMMUNITY<span class="text-amber-brand">.</span>
+</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14">
+<!-- Community Card 1 -->
+<article class="flex flex-col justify-between p-6 sm:p-8 rounded-xl bg-surface-card border border-white/10 hover:border-amber-brand/40 transition-all duration-300 group shadow-lg">
+<div class="space-y-6">
+<div class="relative w-full aspect-[16/9] rounded-lg overflow-hidden bg-[#070A10] border border-white/[0.08]">
+<div class="w-full h-full bg-cover bg-center opacity-75 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500" data-location="Jamshedpur, Jharkhand" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAkhbo6_PsI13iRm6igOpFu32VvpH3p05xIHJIsA9eUbhg7ts1H3Wp-d2nqDySf1xd6_JEU0YhrPenCdedqL2dMpgW1pHg0dMoJezMSX0J-ZwluVTH1IuxawjpVV65X9gO37GYjtKqfW_vK6fgUUdlTirLrElqxJdYhCUInPr2KmL7YQDcitsRwgrspXmKCf8ynvaJnZEt1MMRFUv6nZaYA_xgAVDQmleP-x7Z3BP8')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-card via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 font-mono text-[10px] px-2 py-0.5 rounded bg-surface-base/90 border border-white/10 text-silver-metallic">
+                [ ROUTING / GEO ]
+              </div>
+</div>
+<div class="space-y-2">
+<h3 class="font-display-vt text-2xl sm:text-3xl text-white group-hover:text-amber-brand transition-colors uppercase tracking-wide">
+                KINETIC LOGISTICS ROUTING
+              </h3>
+<div class="font-mono text-xs text-text-muted space-y-0.5">
+<div class="">BUILDER: <span class="text-text-primary">Vikram Singh &amp; Aditi Roy</span></div>
+<div class="">PROGRAM: <span class="text-amber-brand">AIML Core</span></div>
+</div>
+<p class="text-text-secondary text-sm leading-relaxed pt-2">
+                Heuristic routing optimizer for regional freight distribution corridors connecting Jamshedpur, Ranchi, and Kolkata terminals under dynamic traffic loads.
+              </p>
+</div>
+</div>
+<div class="pt-6 mt-6 border-t border-white/[0.08]">
+<a class="inline-flex items-center font-mono text-xs text-amber-brand hover:text-amber-glow font-semibold tracking-wider transition-colors gap-1.5" href="#">
+              [ VIEW PROJECT → ]
+            </a>
+</div>
+</article>
+<!-- Community Card 2 -->
+<article class="flex flex-col justify-between p-6 sm:p-8 rounded-xl bg-surface-card border border-white/10 hover:border-amber-brand/40 transition-all duration-300 group shadow-lg">
+<div class="space-y-6">
+<div class="relative w-full aspect-[16/9] rounded-lg overflow-hidden bg-[#070A10] border border-white/[0.08]">
+<img class="w-full h-full object-cover opacity-75 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500" data-alt="Edge computing AI vision camera system hardware node mounted in computer lab, running localized PyTorch model with bounding box overlays and real-time inference latency numbers, dark blue and graphite styling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC73Ztvy8rc9LISkvhwpj4yGTo32ceSEASpBlPXEe4QLWk-Uo3CNpCW8_9_efqci3-z5KCEYhJgsOKleG8PWkh9KNGFYxMmS2v7cknVP_gPMcWcAwf_jJIpB4xhX3UQeBoVxhr5JnunQ1B6dymO1a0CBuxXV89QjSntA565jym0zirbNOFCEEH-Sqah679nQZX0ayMrFUzAXM9VnWxHBYQZQxDB6M8KFynNOLuY9MA">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-card via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 font-mono text-[10px] px-2 py-0.5 rounded bg-surface-base/90 border border-white/10 text-silver-metallic">
+                [ EDGE / ONNX ]
+              </div>
+</div>
+<div class="space-y-2">
+<h3 class="font-display-vt text-2xl sm:text-3xl text-white group-hover:text-amber-brand transition-colors uppercase tracking-wide">
+                CAMPUS ATTENDANCE VISION NODE
+              </h3>
+<div class="font-mono text-xs text-text-muted space-y-0.5">
+<div class="">BUILDER: <span class="text-text-primary">Rahul Verma</span></div>
+<div class="">PROGRAM: <span class="text-amber-brand">AI / ML Track</span></div>
+</div>
+<p class="text-text-secondary text-sm leading-relaxed pt-2">
+                Edge-computed face verification system running on localized hardware with zero cloud dependency and on-device privacy guarantee.
+              </p>
+</div>
+</div>
+<div class="pt-6 mt-6 border-t border-white/[0.08]">
+<a class="inline-flex items-center font-mono text-xs text-amber-brand hover:text-amber-glow font-semibold tracking-wider transition-colors gap-1.5" href="#">
+              [ VIEW PROJECT → ]
+            </a>
+</div>
+</article>
+</div>
+</section>
+<!-- 04 — STUDENT SPOTLIGHT (Editorial Human-Focused Story) -->
+<section class="relative w-full max-w-7xl mx-auto px-4 sm:px-8 py-20 border-t border-white/10">
+<div class="flex flex-col gap-2 mb-10">
+<span class="font-mono text-xs text-amber-brand tracking-widest uppercase block">[ BUILDER / STORY ]</span>
+<h2 class="font-display-vt text-4xl sm:text-5xl text-white tracking-tight uppercase">
+          BEHIND THE BUILD<span class="text-amber-brand">.</span>
+</h2>
+</div>
+<div class="p-8 sm:p-12 lg:p-16 rounded-2xl bg-surface-card border border-white/10 relative overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+<!-- Ambient Watermark -->
+<div class="absolute -right-8 -bottom-8 pointer-events-none select-none opacity-[0.03] font-display-vt text-[160px] text-white">
+          BUILDER
+        </div>
+<!-- Left: Authentic Student Portrait/Lab Scene -->
+<div class="lg:col-span-5 relative rounded-xl overflow-hidden bg-surface-container border border-white/10 aspect-[4/5] shadow-2xl">
+<img class="w-full h-full object-cover filter grayscale contrast-125 hover:grayscale-0 transition-all duration-700" data-alt="Student developer working deeply at an engineering workstation inside AstraTech labs Jamshedpur surrounded by terminal code displays and hardware prototype breadboards, focused cinematic technical portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7H8h-_l4c3d07ZwzzUsznfJM5Vmk4KUbpZEUEPI41pNHRWqiYkFOL2n6YeVo1VU7sN0EKbmUTFsX7uTXwjO_ljmHAwJ42vmcKEzi5bvyKqu6sRHUc6IkjtnC8a_G4SwYyYR2MBOZQvzgsPkbktTAnEkAR_58AZInwLOcDt3JneSzHgAdPUjk5elLuw5d0vytJayVC_4JoYDRHu9Z54rXtmZPi-Zzpi06kLhyk800">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-base/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 font-mono text-xs text-silver-metallic bg-surface-base/90 px-3 py-1 rounded border border-white/10">
+            JAMSHEDPUR LAB // TERMINAL 04
+          </div>
+</div>
+<!-- Right: Story Transcript -->
+<div class="lg:col-span-7 flex flex-col justify-center space-y-6 relative z-10">
+<div class="space-y-4">
+<div>
+<span class="font-mono text-[11px] text-text-muted tracking-widest uppercase block">BUILT BY</span>
+<div class="font-mono text-lg text-white font-semibold">Aman Sharma — <span class="text-amber-brand font-normal">Full-Stack Developer</span></div>
+</div>
+<div>
+<span class="font-mono text-[11px] text-text-muted tracking-widest uppercase block">PROJECT</span>
+<div class="font-display-vt text-2xl sm:text-3xl text-white tracking-wide uppercase">Municipal Sensor Telemetry Hub</div>
+</div>
+</div>
+<div class="space-y-3 pt-2 border-t border-white/[0.08]"><a class="inline-flex items-center px-5 py-2.5 rounded-sm bg-transparent border border-[#f59e0b]/40 hover:border-[#f59e0b] text-slate-200 hover:text-white font-mono text-xs font-semibold tracking-wider transition-all duration-200 shadow-sm" href="#">[ VIEW PROJECT → ]</a></div>
+<div class="pt-2"><a class="inline-flex items-center px-5 py-2.5 rounded-sm bg-transparent border border-[#f59e0b]/40 hover:border-[#f59e0b] text-slate-200 hover:text-white font-mono text-xs font-semibold tracking-wider transition-all duration-200 shadow-sm" href="#">[ VIEW PROJECT → ]</a></div>
+</div>
+</div>
+</section>
+<!-- 05 — THE BUILD PROCESS (Minimal, Elegant Horizontal Sequence) -->
+<section class="relative w-full max-w-7xl mx-auto px-4 sm:px-8 py-20 border-t border-white/10">
+<div class="flex flex-col gap-2 mb-12 text-center md:text-left">
+<span class="font-mono text-xs text-amber-brand tracking-widest uppercase block">[ HOW IT HAPPENS ]</span>
+<h2 class="font-display-vt text-4xl sm:text-5xl text-white tracking-tight uppercase">
+          FROM IDEA TO BUILD<span class="text-amber-brand">.</span>
+</h2>
+<p class="text-text-secondary text-base max-w-2xl mt-1">
+          Students turn what they learn into something they can actually build, test and show.
+        </p>
+</div>
+<!-- Minimal Horizontal Timeline Sequence -->
+<div class="p-8 sm:p-12 rounded-xl bg-surface-card border border-white/10 relative">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 relative">
+<!-- Step 1 -->
+<div class="flex flex-col space-y-2 relative">
+<div class="flex items-center gap-2 font-mono text-xs text-text-muted">
+<span class="text-amber-brand font-bold">01 //</span>
+<span class="">PHASE</span>
+</div>
+<div class="font-display-vt text-3xl sm:text-4xl text-white tracking-wide uppercase">IDEA</div>
+<p class="text-text-secondary text-xs sm:text-sm font-sans pt-1">
+              Identify a concrete regional, algorithmic, or commercial opportunity.
+            </p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col space-y-2 relative">
+<div class="flex items-center gap-2 font-mono text-xs text-text-muted">
+<span class="text-amber-brand font-bold">02 //</span>
+<span class="">PHASE</span>
+</div>
+<div class="font-display-vt text-3xl sm:text-4xl text-white tracking-wide uppercase">BUILD</div>
+<p class="text-text-secondary text-xs sm:text-sm font-sans pt-1">
+              Turn theoretical design into executable code and reactive schemas.
+            </p>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col space-y-2 relative">
+<div class="flex items-center gap-2 font-mono text-xs text-text-muted">
+<span class="text-amber-brand font-bold">03 //</span>
+<span class="">PHASE</span>
+</div>
+<div class="font-display-vt text-3xl sm:text-4xl text-white tracking-wide uppercase">TEST</div>
+<p class="text-text-secondary text-xs sm:text-sm font-sans pt-1">
+              Stress test, benchmark latency, and profile under real concurrency.
+            </p>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col space-y-2 relative">
+<div class="flex items-center gap-2 font-mono text-xs text-text-muted">
+<span class="text-amber-brand font-bold">04 //</span>
+<span class="">PHASE</span>
+</div>
+<div class="font-display-vt text-3xl sm:text-4xl text-white tracking-wide uppercase text-amber-brand">DEPLOY</div>
+<p class="text-text-secondary text-xs sm:text-sm font-sans pt-1">
+              Push public URLs, attach live telemetry, and maintain production uptime.
+            </p>
+</div>
+</div>
+<!-- Horizontal Flow Arrow Line -->
+<div class="mt-8 pt-6 border-t border-white/[0.08] flex items-center justify-between font-mono text-[11px] text-text-muted">
+<div class="flex items-center gap-3">
+<span class="h-2 w-2 rounded-full bg-amber-brand animate-ping"></span>
+<span class="">SYSTEM CONTINUUM PROTOCOL</span>
+</div>
+<span class="text-amber-brand">IDEA → BUILD → TEST → DEPLOY</span>
+</div>
+</div>
+</section>
+<!-- 06 — NEXT BUILD / CTA -->
+<section class="relative w-full max-w-7xl mx-auto px-4 sm:px-8 pt-12 pb-16">
+<div class="p-10 sm:p-16 md:p-20 rounded-2xl bg-gradient-to-b from-surface-card to-[#070A10] border border-white/10 text-center flex flex-col items-center gap-6 relative overflow-hidden shadow-2xl">
+<div class="flex items-center gap-2 font-mono text-xs text-amber-brand">
+<span class="h-1.5 w-1.5 rounded-full bg-amber-brand animate-ping"></span>
+<span class="">[ NEXT BUILD ]</span>
+</div>
+<h2 class="font-display-vt text-5xl sm:text-6xl md:text-7xl text-white uppercase tracking-tight max-w-3xl leading-none">
+          YOUR BUILD COULD BE NEXT<span class="text-amber-brand">.</span>
+</h2>
+<p class="font-mono text-lg sm:text-xl text-text-secondary max-w-xl">
+          Every project starts with an idea.
+        </p>
+<div class="pt-4 flex flex-wrap justify-center gap-4"><a class="px-8 py-3.5 rounded-sm bg-[#f59e0b] hover:bg-[#d97706] text-black font-mono text-xs sm:text-sm font-bold tracking-widest uppercase transition-all duration-200 hover:scale-105 shadow-[0_0_24px_rgba(245,158,11,0.35)]" data-path="courses" href="/courses">[ EXPLORE COURSES → ]</a></div>
+<div class="pt-6 font-mono text-xs text-text-muted tracking-widest uppercase">
+          ASTRA_ACADEMY // JAMSHEDPUR TECH CAMPUS // BATCH 2025-2026
+        </div>
+</div>
+</section>
+</main>
+<!-- MULTI-COLUMN TECHNICAL TELEMETRY FOOTER -->
+<footer class="w-full bg-[#030508] border-t border-white/10 pt-16 pb-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 pb-14 border-b border-white/10">
+      <!-- Col 1 & 2: Lab Identity -->
+      <div class="md:col-span-2 space-y-4">
+        <div class="flex items-center gap-2">
+          <span class="font-mono text-xl text-white tracking-tight font-bold">ASTRATECH AI</span>
+          <span class="font-mono text-[10px] text-[#f59e0b] px-1.5 py-0.5 rounded bg-surface-elevated border border-[#f59e0b]/40">// BLUEPRINT ARCH</span>
+        </div>
+        <p class="text-sm text-slate-400 max-w-md leading-relaxed font-sans">
+          Autonomous intelligence and computational infrastructure laboratory. Precision neural runtime architectures deployed from Jamshedpur node.
+        </p>
+        <div class="flex items-center gap-4 pt-2">
+          <div class="flex items-center gap-2 font-mono text-xs text-white px-3 py-1 rounded bg-surface-elevated border border-white/10">
+            <span class="h-2 w-2 rounded-full bg-[#f59e0b] animate-ping"></span>
+            [NODE_STATUS: ONLINE]
+          </div>
+          <span class="font-mono text-xs text-slate-400">GEO: 22.8046°N, 86.2029°E</span>
+        </div>
+      </div>
+      <!-- Col 3: Directory -->
+      <div>
+        <span class="font-mono text-xs text-white tracking-widest block mb-4 uppercase">[SECTIONS_INDEX]</span>
+        <ul class="space-y-2 font-mono text-xs">
+          <li class="flex items-center gap-2">
+            <span class="text-[#f59e0b]">01.</span>
+            <a class="text-slate-400 hover:text-white transition-colors" data-path="about" href="/about">About</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-[#f59e0b]">02.</span>
+            <a class="text-slate-400 hover:text-white transition-colors" data-path="developers" href="/about">Developers</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-[#f59e0b]">03.</span>
+            <a class="text-slate-400 hover:text-white transition-colors" data-path="events" href="#">Events</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-[#f59e0b]">04.</span>
+            <a class="text-slate-400 hover:text-white transition-colors" data-path="contact" href="/#contact">Contact</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-[#f59e0b]">05.</span>
+            <a class="text-slate-400 hover:text-white transition-colors" data-path="courses" href="/courses">Courses</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-[#f59e0b]">06.</span>
+            <a class="text-slate-400 hover:text-white transition-colors" data-path="projects" href="/projects">Projects</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-[#f59e0b]">07.</span>
+            <a class="text-slate-400 hover:text-white transition-colors" data-path="media" href="/#media">Media</a>
+          </li>
+        </ul>
+      </div>
+      <!-- Col 4: Regulatory -->
+      <div>
+        <span class="font-mono text-xs text-white tracking-widest block mb-4 uppercase">[REGULATORY]</span>
+        <ul class="space-y-2 font-mono text-xs text-slate-400">
+          <li class=""><a class="hover:text-white transition-colors" data-path="governance-ethics" href="#">Neural Governance</a></li>
+          <li class=""><a class="hover:text-white transition-colors" data-path="protocol-l5-security" href="#">Protocol L5 Security</a></li>
+          <li class=""><a class="hover:text-white transition-colors" data-path="api-terms" href="#">Runtime API Terms</a></li>
+          <li class=""><a class="hover:text-white transition-colors" data-path="data-compliance" href="#">Telemetry Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- Bottom Status Bar -->
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-text-muted">
+      <div class="text-slate-400">© AstraTech AI, Jamshedpur, Jharkhand. All systems operational.</div>
+      <div class="flex items-center gap-3">
+        <span class="text-slate-400">LAT: 22.8046°N // LON: 86.2029°E</span>
+        <span class="text-white/20">//</span>
+        <span class="text-[#f59e0b]">SYS_REV: 4.8.1-PROD</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

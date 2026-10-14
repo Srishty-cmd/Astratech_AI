@@ -1,0 +1,857 @@
+<!-- AstraTech AI — Courses (Tactical Minimal) -->
+<!DOCTYPE html>
+
+<html class="dark" lang="en" style=""><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=VT323&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {canvas: "#070A0F", surface: "#111318", "surface-card": "#0d121c", "surface-panel": "#111827", "hud-amber": "#F5A400", "hud-amber-light": "#fbbf24", "hud-green": "#10b981", "hud-cyan": "#06b6d4", "border-hud": "rgba(245, 164, 0, 0.25)", "text-lead": "#f8fafc", "text-dim": "#94a3b8", "surface-container-highest": "#32353a", "on-secondary": "#2b3136", "on-secondary-fixed-variant": "#41484c", "on-primary": "#2d3137", "primary-container": "#0d1117", "surface-container-high": "#272a2f", "surface-bright": "#37393e", "secondary-fixed-dim": "#c1c7cd", "on-secondary-container": "#b3b9bf", "primary-fixed": "#dfe2eb", "on-tertiary": "#3a2e26", "surface-container": "#1d2024", "on-primary-container": "#797d85", error: "#ffb4ab", "tertiary-container": "#180f08", outline: "#8f9095", "inverse-primary": "#5b5e66", "error-container": "#93000a", "surface-tint": "#c3c6cf", "surface-dim": "#111318", "on-primary-fixed": "#181c22", "on-primary-fixed-variant": "#43474e", "outline-variant": "#45474b", "tertiary-fixed-dim": "#d6c3b7", "primary-fixed-dim": "#c3c6cf", background: "#111318", "surface-container-lowest": "#0c0e13", "surface-container-low": "#191c20", "on-background": "#e1e2e9", "secondary-container": "#434a4f", primary: "#c3c6cf", "on-tertiary-container": "#897a6f", "on-error-container": "#ffdad6", "on-surface": "#e1e2e9", "on-secondary-fixed": "#161c21", "tertiary-fixed": "#f3dfd2", "surface-variant": "#32353a", "on-tertiary-fixed": "#231a12", "inverse-on-surface": "#2e3035", tertiary: "#d6c3b7", "on-tertiary-fixed-variant": "#51443b", "on-error": "#690005", secondary: "#c1c7cd", "on-surface-variant": "#c6c6cb", "secondary-fixed": "#dde3e9", "inverse-surface": "#e1e2e9"}, fontFamily: {mono: ["'JetBrains Mono'", "monospace"], pixel: ["'VT323'", "monospace"], sans: ["'Space Grotesk'", "sans-serif"], headline: ["Sora"], display: ["Sora"], body: ["Space Grotesk"], label: ["Space Grotesk"]}, fontSize: {}, borderRadius: {DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px"}}}};</script><style>
+  @layer base {
+    body {
+      background-color: #070A0F;
+      color: #cbd5e1;
+      font-family: 'JetBrains Mono', monospace;
+    }
+  }
+  .blueprint-grid {
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to right, rgba(245, 164, 0, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(245, 164, 0, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px;
+  }
+  .hud-scanline {
+    background: linear-gradient(180deg, rgba(255,255,255,0.015) 50%, rgba(0, 0, 0, 0.28) 51%);
+    background-size: 100% 4px;
+  }
+  .pixel-heading {
+    font-family: 'VT323', monospace;
+    letter-spacing: 0.02em;
+  }
+</style></head><body class="bg-[#070A0F] text-slate-300 font-mono selection:bg-[#F5A400] selection:text-black antialiased relative blueprint-grid min-h-screen flex flex-col justify-between"><div class="fixed inset-0 pointer-events-none hud-scanline z-40 opacity-40"></div>
+<!-- TOP STATUS TELEMETRY STRIP -->
+<div class="w-full bg-[#05070c] border-b border-[#F5A400]/20 py-1.5 px-4 text-[11px] font-mono flex items-center justify-between text-slate-400 relative z-50">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1.5 text-[#10b981]"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-ping"></span>[SYS_STATUS: NOMINAL // FEED: 99.8%]</span>
+<span class="hidden md:inline text-[#F5A400]/80">[LAT: 22.8048° N // LON: 86.2029° E]</span>
+<span class="hidden lg:inline text-slate-500">[REGION: JAMSHEDPUR, JHARKHAND — NODE_01]</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[#F5A400] font-semibold">[DEF_AUTH: PROTOCOL_L5]</span>
+<span class="text-slate-400">CLK: UTC+05:30</span>
+</div>
+</div>
+<!-- TACTICAL NAVIGATION BAR -->
+<header class="sticky top-0 left-0 right-0 z-50 bg-[#070A0F]/90 backdrop-blur-md border-b border-[#F5A400]/30 shadow-[0_4px_25px_rgba(0,0,0,0.8)]">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<a class="flex items-center gap-2.5 group" data-path="home" href="/">
+<div class="w-8 h-8 rounded border border-[#F5A400]/80 bg-black/60 flex items-center justify-center text-[#F5A400] group-hover:bg-[#F5A400] group-hover:text-black transition-all shadow-[0_0_10px_rgba(245,164,0,0.2)]">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-mono font-bold text-[15px] tracking-wider text-white">ASTRATECH</span>
+<span class="text-[9px] font-mono px-1 py-0.5 rounded bg-[#F5A400]/10 text-[#F5A400] border border-[#F5A400]/40">AI.OS</span>
+</div>
+<span class="text-[9px] font-mono text-slate-400 tracking-widest -mt-0.5">// JAMSHEDPUR LAB</span>
+</div>
+</a>
+</div>
+<nav class="hidden lg:flex items-center gap-7 font-mono text-xs text-slate-400">
+<a class="hover:text-[#F5A400] transition-colors flex items-center gap-1" data-path="home" href="/"><span class="text-[10px] text-slate-600">//</span>HOME</a>
+<a class="hover:text-[#F5A400] transition-colors flex items-center gap-1" data-path="about" href="/about"><span class="text-[10px] text-slate-600">//</span>ABOUT</a>
+<a class="text-[#F5A400] font-semibold flex items-center gap-1" data-path="courses" href="/courses"><span class="text-[10px] text-[#F5A400]">&gt;</span>COURSES</a><a class="hover:text-[#F5A400] transition-colors flex items-center gap-1" data-path="projects" href="/projects"><span class="text-[10px] text-slate-600">//</span>PROJECTS</a>
+<a class="hover:text-[#F5A400] transition-colors flex items-center gap-1" data-path="developers" href="/about"><span class="text-[10px] text-slate-600">//</span>DEVELOPERS</a>
+<a class="hover:text-[#F5A400] transition-colors flex items-center gap-1" data-path="media" href="/#media"><span class="text-[10px] text-slate-600">//</span>MEDIA</a>
+<a class="hover:text-[#F5A400] transition-colors flex items-center gap-1" data-path="contact" href="/#contact"><span class="text-[10px] text-slate-600">//</span>CONTACT</a>
+</nav>
+<div class="flex items-center gap-3">
+<a class="font-mono text-xs inline-flex items-center gap-1.5 px-4 py-2 rounded bg-[#F5A400]/10 border border-[#F5A400] text-[#F5A400] hover:bg-[#F5A400] hover:text-black font-semibold transition-all shadow-[0_0_15px_rgba(245,164,0,0.25)]" data-path="join-astratech" href="/#join">
+<span class="">[INIT_ENROLL]</span>
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+</a>
+<div class="w-8 h-8 rounded border border-slate-700 bg-[#0b0f17] flex items-center justify-center text-slate-400 text-xs font-mono">
+<span class="">01</span>
+</div>
+</div>
+</div>
+</header>
+<main class="w-full relative z-10 flex-grow">
+<!-- SECTION 1: HERO -->
+<section class="w-full px-4 sm:px-6 pt-16 pb-14 border-b border-white/10 bg-[#070A0F]">
+<div class="max-w-7xl mx-auto flex flex-col items-start gap-4">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 text-xs font-mono font-bold tracking-widest text-[#F5A400] bg-[#F5A400]/10 border border-[#F5A400]/30">
+          [ COURSES / PROGRAMS ]
+        </span>
+</div>
+<h1 class="pixel-heading text-4xl sm:text-5xl lg:text-6xl text-white font-normal uppercase leading-[1.08] max-w-4xl tracking-wide">
+        BUILD SKILLS THAT YOU CAN <span class="text-[#F5A400]">ACTUALLY BUILD WITH.</span>
+</h1>
+<p class="max-w-2xl text-sm sm:text-base font-mono text-slate-400 leading-relaxed pt-1">
+        Practical technology programs focused on learning, building and real-world application.
+      </p>
+</div>
+</section>
+<!-- SECTION 2: COURSES (AVAILABLE PROGRAMS) - EXACT 2x3 GRID -->
+<section class="w-full px-4 sm:px-6 py-16 sm:py-20" id="courses">
+<div class="max-w-7xl mx-auto space-y-10">
+<!-- Section Header -->
+<div class="space-y-2 border-b border-white/10 pb-6">
+<span class="text-xs font-mono font-semibold tracking-wider text-[#F5A400] uppercase">
+          [ AVAILABLE PROGRAMS ]
+        </span>
+<h2 class="pixel-heading text-3xl sm:text-4xl text-white font-normal uppercase tracking-wide">
+          CHOOSE YOUR DIRECTION.
+        </h2>
+</div>
+<!-- EXACT 2 x 3 GRID -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+<!-- CARD 01: FULL STACK DEVELOPMENT -->
+<article class="p-8 md:p-10 bg-[#0d121c]/80 backdrop-blur-md border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between gap-8 rounded-none">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-3">
+<span class="text-xs font-mono font-bold text-[#F5A400] tracking-wider">01 // FDE</span>
+<div class="flex items-center gap-2 text-[11px] font-mono text-[#10b981]">
+<span class="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+<span class="">ENROLLMENT OPEN</span>
+</div>
+</div>
+<h3 class="pixel-heading text-2xl sm:text-3xl text-white font-normal uppercase tracking-wide pt-1">
+              FULL STACK DEVELOPMENT
+            </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+              Build modern web applications from frontend to backend, APIs, databases and deployment.
+            </p>
+</div>
+<div>
+<button class="w-full sm:w-auto px-6 py-3 bg-[#F5A400]/10 hover:bg-[#F5A400] text-[#F5A400] hover:text-black border border-[#F5A400]/60 font-mono text-xs font-bold uppercase tracking-wider transition-all" onclick="openCurriculumModal('Full Stack Development')" type="button">
+              [ GET CURRICULUM → ]
+            </button>
+</div>
+</article>
+<!-- CARD 02: AI & MACHINE LEARNING -->
+<article class="p-8 md:p-10 bg-[#0d121c]/80 backdrop-blur-md border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between gap-8 rounded-none">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-3">
+<span class="text-xs font-mono font-bold text-[#F5A400] tracking-wider">02 // AIML</span>
+<div class="flex items-center gap-2 text-[11px] font-mono text-[#10b981]">
+<span class="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+<span class="">ENROLLMENT OPEN</span>
+</div>
+</div>
+<h3 class="pixel-heading text-2xl sm:text-3xl text-white font-normal uppercase tracking-wide pt-1">
+              AI &amp; MACHINE LEARNING
+            </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+              Build practical foundations in artificial intelligence and machine learning through projects.
+            </p>
+</div>
+<div>
+<button class="w-full sm:w-auto px-6 py-3 bg-[#F5A400]/10 hover:bg-[#F5A400] text-[#F5A400] hover:text-black border border-[#F5A400]/60 font-mono text-xs font-bold uppercase tracking-wider transition-all" onclick="openCurriculumModal('AI &amp; Machine Learning')" type="button">
+              [ GET CURRICULUM → ]
+            </button>
+</div>
+</article>
+<!-- CARD 03: PROGRAMMING & DSA -->
+<article class="p-8 md:p-10 bg-[#0d121c]/80 backdrop-blur-md border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between gap-8 rounded-none">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-3">
+<span class="text-xs font-mono font-bold text-slate-400 tracking-wider">03 // PROGRAMMING</span>
+<div class="flex items-center gap-2 text-[11px] font-mono text-amber-400/90">
+<span class="w-2 h-2 rounded-full bg-[#F5A400]"></span>
+<span class="">COMING SOON</span>
+</div>
+</div>
+<h3 class="pixel-heading text-2xl sm:text-3xl text-white font-normal uppercase tracking-wide pt-1">
+              PROGRAMMING &amp; DSA
+            </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+              Build strong programming fundamentals and problem-solving skills.
+            </p>
+</div>
+<div>
+<button class="w-full sm:w-auto px-6 py-3 bg-white/5 hover:bg-[#F5A400]/15 text-slate-300 hover:text-[#F5A400] border border-white/20 hover:border-[#F5A400]/50 font-mono text-xs font-medium uppercase tracking-wider transition-all" onclick="triggerNotifyMe('PROGRAMMING &amp; DSA')" type="button">
+              [ NOTIFY ME → ]
+            </button>
+</div>
+</article>
+<!-- CARD 04: DATA ANALYTICS -->
+<article class="p-8 md:p-10 bg-[#0d121c]/80 backdrop-blur-md border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between gap-8 rounded-none">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-3">
+<span class="text-xs font-mono font-bold text-slate-400 tracking-wider">04 // DATA</span>
+<div class="flex items-center gap-2 text-[11px] font-mono text-amber-400/90">
+<span class="w-2 h-2 rounded-full bg-[#F5A400]"></span>
+<span class="">COMING SOON</span>
+</div>
+</div>
+<h3 class="pixel-heading text-2xl sm:text-3xl text-white font-normal uppercase tracking-wide pt-1">
+              DATA ANALYTICS
+            </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+              Learn to work with data and turn information into useful insights.
+            </p>
+</div>
+<div>
+<button class="w-full sm:w-auto px-6 py-3 bg-white/5 hover:bg-[#F5A400]/15 text-slate-300 hover:text-[#F5A400] border border-white/20 hover:border-[#F5A400]/50 font-mono text-xs font-medium uppercase tracking-wider transition-all" onclick="triggerNotifyMe('DATA ANALYTICS')" type="button">
+              [ NOTIFY ME → ]
+            </button>
+</div>
+</article>
+<!-- CARD 05: CLOUD & DEVOPS -->
+<article class="p-8 md:p-10 bg-[#0d121c]/80 backdrop-blur-md border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between gap-8 rounded-none">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-3">
+<span class="text-xs font-mono font-bold text-slate-400 tracking-wider">05 // CLOUD</span>
+<div class="flex items-center gap-2 text-[11px] font-mono text-amber-400/90">
+<span class="w-2 h-2 rounded-full bg-[#F5A400]"></span>
+<span class="">COMING SOON</span>
+</div>
+</div>
+<h3 class="pixel-heading text-2xl sm:text-3xl text-white font-normal uppercase tracking-wide pt-1">
+              CLOUD &amp; DEVOPS
+            </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+              Learn the foundations of cloud, deployment and modern development workflows.
+            </p>
+</div>
+<div>
+<button class="w-full sm:w-auto px-6 py-3 bg-white/5 hover:bg-[#F5A400]/15 text-slate-300 hover:text-[#F5A400] border border-white/20 hover:border-[#F5A400]/50 font-mono text-xs font-medium uppercase tracking-wider transition-all" onclick="triggerNotifyMe('CLOUD &amp; DEVOPS')" type="button">
+              [ NOTIFY ME → ]
+            </button>
+</div>
+</article>
+<!-- CARD 06: UI/UX & PRODUCT DESIGN -->
+<article class="p-8 md:p-10 bg-[#0d121c]/80 backdrop-blur-md border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between gap-8 rounded-none">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-3">
+<span class="text-xs font-mono font-bold text-slate-400 tracking-wider">06 // DESIGN</span>
+<div class="flex items-center gap-2 text-[11px] font-mono text-amber-400/90">
+<span class="w-2 h-2 rounded-full bg-[#F5A400]"></span>
+<span class="">COMING SOON</span>
+</div>
+</div>
+<h3 class="pixel-heading text-2xl sm:text-3xl text-white font-normal uppercase tracking-wide pt-1">
+              UI/UX &amp; PRODUCT DESIGN
+            </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+              Learn how to design useful, intuitive digital experiences.
+            </p>
+</div>
+<div>
+<button class="w-full sm:w-auto px-6 py-3 bg-white/5 hover:bg-[#F5A400]/15 text-slate-300 hover:text-[#F5A400] border border-white/20 hover:border-[#F5A400]/50 font-mono text-xs font-medium uppercase tracking-wider transition-all" onclick="triggerNotifyMe('UI/UX &amp; PRODUCT DESIGN')" type="button">
+              [ NOTIFY ME → ]
+            </button>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- SECTION 3: FINAL CTA -->
+<!-- SECTION: INSIDE ASTRA (MEDIA & LAB CULTURE) -->
+<section class="w-full px-4 sm:px-6 py-16 sm:py-20 border-t border-white/10 bg-[#05070c] relative" id="inside-astra">
+<div class="max-w-7xl mx-auto space-y-10">
+<!-- Header -->
+<div class="space-y-2 border-b border-white/10 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<span class="text-xs font-mono font-semibold tracking-wider text-[#F5A400] uppercase block mb-1">
+          [ INSIDE ASTRA ]
+        </span>
+<h2 class="pixel-heading text-3xl sm:text-4xl text-white font-normal uppercase tracking-wide">
+          LEARNING BEYOND THE SCREEN.
+        </h2>
+<p class="text-xs sm:text-sm font-mono text-slate-400 mt-2 max-w-xl">
+          Direct immersion into the physical lab space, live system refactoring, and collaborative engineering telemetry.
+        </p>
+</div>
+<div class="flex items-center gap-2 text-xs font-mono text-slate-500">
+<span class="inline-block w-2 h-2 rounded-full bg-[#10b981] animate-ping"></span>
+<span class="">LAB_FEED: ACTIVE // JAMSHEDPUR</span>
+</div>
+</div>
+<!-- 4-Card Media Gallery Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+<!-- CARD 1: WORKSHOPS -->
+<article class="p-6 sm:p-8 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between group rounded-none relative overflow-hidden">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-3 text-xs font-mono">
+<span class="text-[#F5A400] font-bold tracking-wider">01 // WORKSHOPS</span>
+<span class="text-slate-500">// JSR_LAB_01</span>
+</div>
+<!-- Media Canvas / Tactical Mock Visual -->
+<div class="w-full h-48 bg-[#070A0F] border border-white/5 relative flex flex-col justify-between p-4 group-hover:border-[#F5A400]/30 transition-colors overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(#F5A400_1px,transparent_1px)] [background-size:16px_16px] opacity-15 pointer-events-none"></div>
+<div class="flex items-center justify-between z-10">
+<span class="text-[10px] font-mono px-2 py-0.5 bg-[#F5A400]/10 text-[#F5A400] border border-[#F5A400]/25">DISSECTION_BENCH</span>
+<span class="material-symbols-outlined text-slate-600 text-sm">memory</span>
+</div>
+<div class="z-10 font-mono text-[11px] text-slate-400 space-y-1 bg-black/60 p-2.5 border border-white/5 backdrop-blur-sm">
+<div class="text-[#10b981] flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>SYSTEM_TRACE: LIVE PARSING
+</div>
+<div class="text-slate-500 text-[10px]">&gt; kernel_inspect --node=jsr-alpha</div>
+</div>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide pt-2 group-hover:text-[#F5A400] transition-colors">
+              WORKSHOPS
+            </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+              Hands-on intensive technical breakdowns, interactive code dissection and systems engineering.
+            </p>
+</div>
+<div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono text-slate-500">
+<span class="">FORMAT: IN-LAB DISSECTION</span>
+<span class="text-[#F5A400] text-[11px]">[ FREQ: BI-WEEKLY ]</span>
+</div>
+</article>
+<!-- CARD 2: PROJECT BUILDING -->
+<article class="p-6 sm:p-8 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between group rounded-none relative overflow-hidden">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-3 text-xs font-mono">
+<span class="text-[#F5A400] font-bold tracking-wider">02 // BUILDS</span>
+<span class="text-slate-500">// SPRINT_PROTOCOL</span>
+</div>
+<!-- Media Canvas / Tactical Mock Visual -->
+<div class="w-full h-48 bg-[#070A0F] border border-white/5 relative flex flex-col justify-between p-4 group-hover:border-[#F5A400]/30 transition-colors overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(#F5A400_1px,transparent_1px)] [background-size:16px_16px] opacity-15 pointer-events-none"></div>
+<div class="flex items-center justify-between z-10">
+<span class="text-[10px] font-mono px-2 py-0.5 bg-[#F5A400]/10 text-[#F5A400] border border-[#F5A400]/25">COLLAB_ARCH</span>
+<span class="material-symbols-outlined text-slate-600 text-sm">developer_board</span>
+</div>
+<div class="z-10 font-mono text-[11px] text-slate-400 space-y-1 bg-black/60 p-2.5 border border-white/5 backdrop-blur-sm">
+<div class="text-white flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#F5A400]"></span>BRANCH: main &lt;-- feature/realtime-cluster
+</div>
+<div class="text-slate-500 text-[10px]">&gt; git commit -m "deploy distributed pipeline"</div>
+</div>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide pt-2 group-hover:text-[#F5A400] transition-colors">
+              PROJECT BUILDING
+            </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+              Collaborative sprints, real-world code architecture in the tech lab.
+            </p>
+</div>
+<div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono text-slate-500">
+<span class="">FORMAT: CO-WORKING SPRINT</span>
+<span class="text-[#F5A400] text-[11px]">[ PIPELINE: PRODUCTION ]</span>
+</div>
+</article>
+<!-- CARD 3: HACKATHONS -->
+<article class="p-6 sm:p-8 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between group rounded-none relative overflow-hidden">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-3 text-xs font-mono">
+<span class="text-[#F5A400] font-bold tracking-wider">03 // HACKATHONS</span>
+<span class="text-slate-500">// CLOCK_PRESSURE</span>
+</div>
+<!-- Media Canvas / Tactical Mock Visual -->
+<div class="w-full h-48 bg-[#070A0F] border border-white/5 relative flex flex-col justify-between p-4 group-hover:border-[#F5A400]/30 transition-colors overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(#F5A400_1px,transparent_1px)] [background-size:16px_16px] opacity-15 pointer-events-none"></div>
+<div class="flex items-center justify-between z-10">
+<span class="text-[10px] font-mono px-2 py-0.5 bg-[#F5A400]/10 text-[#F5A400] border border-[#F5A400]/25">RAPID_DEPLOY</span>
+<span class="material-symbols-outlined text-slate-600 text-sm">timer</span>
+</div>
+<div class="z-10 font-mono text-[11px] text-slate-400 space-y-1 bg-black/60 p-2.5 border border-white/5 backdrop-blur-sm">
+<div class="text-amber-400 flex items-center justify-between">
+<span class="">TIMER: T-MINUS 04:12:09</span>
+<span class="text-[9px] text-[#10b981]">STATUS: SHIPPED</span>
+</div>
+<div class="text-slate-500 text-[10px]">&gt; prod_release v1.0.4 [VERIFIED]</div>
+</div>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide pt-2 group-hover:text-[#F5A400] transition-colors">
+              HACKATHONS
+            </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+              Fast-paced prototyping, shipping functional products under clock pressure.
+            </p>
+</div>
+<div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono text-slate-500">
+<span class="">FORMAT: 24H - 48H INTENSIVE</span>
+<span class="text-[#F5A400] text-[11px]">[ CADENCE: MONTHLY ]</span>
+</div>
+</article>
+<!-- CARD 4: DEVELOPER SESSIONS -->
+<article class="p-6 sm:p-8 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between group rounded-none relative overflow-hidden">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-3 text-xs font-mono">
+<span class="text-[#F5A400] font-bold tracking-wider">04 // SESSIONS</span>
+<span class="text-slate-500">// EVENT_SYS</span>
+</div>
+<!-- Media Canvas / Tactical Mock Visual -->
+<div class="w-full h-48 bg-[#070A0F] border border-white/5 relative flex flex-col justify-between p-4 group-hover:border-[#F5A400]/30 transition-colors overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(#F5A400_1px,transparent_1px)] [background-size:16px_16px] opacity-15 pointer-events-none"></div>
+<div class="flex items-center justify-between z-10">
+<span class="text-[10px] font-mono px-2 py-0.5 bg-[#F5A400]/10 text-[#F5A400] border border-[#F5A400]/25">CODE_REVIEW</span>
+<span class="material-symbols-outlined text-slate-600 text-sm">sync_alt</span>
+</div>
+<div class="z-10 font-mono text-[11px] text-slate-400 space-y-1 bg-black/60 p-2.5 border border-white/5 backdrop-blur-sm">
+<div class="text-[#10b981] flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>CRITIQUE: PEER_AUDIT COMPLETE
+</div>
+<div class="text-slate-500 text-[10px]">&gt; refactor(auth): migrate to zero-trust token mesh</div>
+</div>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide pt-2 group-hover:text-[#F5A400] transition-colors">
+              DEVELOPER SESSIONS
+            </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+              Deep code reviews, peer feedback, live refactoring and architecture discussions.
+            </p>
+</div>
+<div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono text-slate-500">
+<span class="">FORMAT: PEER FORUM &amp; REFACTOR</span>
+<span class="text-[#F5A400] text-[11px]">[ AUDIT: OPEN_ACCESS ]</span>
+</div>
+</article>
+</div>
+</div>
+</section><!-- SECTION: WHAT YOU GET -->
+<section class="w-full px-4 sm:px-6 py-16 sm:py-20 border-t border-white/10 bg-[#070A0F] relative" id="what-you-get">
+<div class="max-w-7xl mx-auto space-y-10">
+<!-- Header -->
+<div class="space-y-2 border-b border-white/10 pb-6">
+<span class="text-xs font-mono font-semibold tracking-wider text-[#F5A400] uppercase block mb-1">
+        [ BEYOND THE CURRICULUM ]
+      </span>
+<h2 class="pixel-heading text-3xl sm:text-4xl text-white font-normal uppercase tracking-wide">
+        WHAT YOU GET.
+      </h2>
+<p class="text-xs sm:text-sm font-mono text-slate-400 mt-2 max-w-xl leading-relaxed">
+        The program is built around more than just a syllabus.
+      </p>
+</div>
+<!-- 2 x 3 Technical Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 01 -->
+<article class="p-6 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between space-y-4 rounded-none group">
+<div class="space-y-2">
+<div class="flex items-center justify-between text-xs font-mono border-b border-white/5 pb-2 text-slate-400">
+<span class="text-[#F5A400] font-bold tracking-wider">01 // PROJECTS</span>
+<span class="text-slate-600">[SYS_EXEC]</span>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide group-hover:text-[#F5A400] transition-colors">
+            PRACTICAL PROJECTS
+          </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+            Learn by building things that actually work.
+          </p>
+</div>
+</article>
+<!-- Card 02 -->
+<article class="p-6 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between space-y-4 rounded-none group">
+<div class="space-y-2">
+<div class="flex items-center justify-between text-xs font-mono border-b border-white/5 pb-2 text-slate-400">
+<span class="text-[#F5A400] font-bold tracking-wider">02 // METHODOLOGY</span>
+<span class="text-slate-600">[SYS_PRACTICE]</span>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide group-hover:text-[#F5A400] transition-colors">
+            HANDS-ON LEARNING
+          </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+            Apply concepts through practical implementation.
+          </p>
+</div>
+</article>
+<!-- Card 03 -->
+<article class="p-6 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between space-y-4 rounded-none group">
+<div class="space-y-2">
+<div class="flex items-center justify-between text-xs font-mono border-b border-white/5 pb-2 text-slate-400">
+<span class="text-[#F5A400] font-bold tracking-wider">03 // NETWORK</span>
+<span class="text-slate-600">[PEER_MESH]</span>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide group-hover:text-[#F5A400] transition-colors">
+            DEVELOPER COMMUNITY
+          </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+            Learn, share and build alongside other learners.
+          </p>
+</div>
+</article>
+<!-- Card 04 -->
+<article class="p-6 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between space-y-4 rounded-none group">
+<div class="space-y-2">
+<div class="flex items-center justify-between text-xs font-mono border-b border-white/5 pb-2 text-slate-400">
+<span class="text-[#F5A400] font-bold tracking-wider">04 // COMPETITION</span>
+<span class="text-slate-600">[SPRINT_TEST]</span>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide group-hover:text-[#F5A400] transition-colors">
+            HACKATHONS &amp; CHALLENGES
+          </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+            Put your skills to the test through real challenges.
+          </p>
+</div>
+</article>
+<!-- Card 05 -->
+<article class="p-6 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between space-y-4 rounded-none group">
+<div class="space-y-2">
+<div class="flex items-center justify-between text-xs font-mono border-b border-white/5 pb-2 text-slate-400">
+<span class="text-[#F5A400] font-bold tracking-wider">05 // PORTFOLIO</span>
+<span class="text-slate-600">[PROOF_OF_WORK]</span>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide group-hover:text-[#F5A400] transition-colors">
+            PROJECT SHOWCASE
+          </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+            Turn your work into something you can actually show.
+          </p>
+</div>
+</article>
+<!-- Card 06 -->
+<article class="p-6 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between space-y-4 rounded-none group">
+<div class="space-y-2">
+<div class="flex items-center justify-between text-xs font-mono border-b border-white/5 pb-2 text-slate-400">
+<span class="text-[#F5A400] font-bold tracking-wider">06 // EVOLUTION</span>
+<span class="text-slate-600">[LONG_CYCLE]</span>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide group-hover:text-[#F5A400] transition-colors">
+            CONTINUOUS GROWTH
+          </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+            Keep learning beyond the program.
+          </p>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- SECTION: HOW TO GET STARTED -->
+<section class="w-full px-4 sm:px-6 py-16 sm:py-20 border-t border-white/10 bg-[#05070c] relative" id="how-to-get-started">
+<div class="max-w-7xl mx-auto space-y-10">
+<!-- Header -->
+<div class="space-y-2 border-b border-white/10 pb-6">
+<span class="text-xs font-mono font-semibold tracking-wider text-[#F5A400] uppercase block mb-1">
+        [ ENROLLMENT / PROCESS ]
+      </span>
+<h2 class="pixel-heading text-3xl sm:text-4xl text-white font-normal uppercase tracking-wide">
+        HOW TO GET STARTED.
+      </h2>
+<p class="text-xs sm:text-sm font-mono text-slate-400 mt-2 max-w-xl leading-relaxed">
+        A structured pipeline from initial selection to hands-on deployment in the lab.
+      </p>
+</div>
+<!-- 5-Step Pipeline Flow -->
+<div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+<!-- Step 01 -->
+<div class="p-6 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between space-y-4 relative group">
+<div class="space-y-3">
+<div class="flex items-center justify-between font-mono text-xs">
+<span class="px-2 py-0.5 bg-[#F5A400]/10 border border-[#F5A400]/30 text-[#F5A400] font-bold">STEP 01</span>
+<span class="text-slate-600 text-[10px] hidden md:inline">// FLOW</span>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide group-hover:text-[#F5A400] transition-colors">
+            CHOOSE
+          </h3>
+<p class="text-xs font-mono text-slate-400 leading-relaxed">
+            Choose the program that fits your direction.
+          </p>
+</div>
+<div class="pt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-500">
+<span class="">DIR_SELECT</span>
+<span class="text-[#F5A400]">→</span>
+</div>
+</div>
+<!-- Step 02 -->
+<div class="p-6 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between space-y-4 relative group">
+<div class="space-y-3">
+<div class="flex items-center justify-between font-mono text-xs">
+<span class="px-2 py-0.5 bg-[#F5A400]/10 border border-[#F5A400]/30 text-[#F5A400] font-bold">STEP 02</span>
+<span class="text-slate-600 text-[10px] hidden md:inline">// FLOW</span>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide group-hover:text-[#F5A400] transition-colors">
+            REQUEST
+          </h3>
+<p class="text-xs font-mono text-slate-400 leading-relaxed">
+            Request the detailed curriculum.
+          </p>
+</div>
+<div class="pt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-500">
+<span class="">DISPATCH_REQ</span>
+<span class="text-[#F5A400]">→</span>
+</div>
+</div>
+<!-- Step 03 -->
+<div class="p-6 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between space-y-4 relative group">
+<div class="space-y-3">
+<div class="flex items-center justify-between font-mono text-xs">
+<span class="px-2 py-0.5 bg-[#F5A400]/10 border border-[#F5A400]/30 text-[#F5A400] font-bold">STEP 03</span>
+<span class="text-slate-600 text-[10px] hidden md:inline">// FLOW</span>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide group-hover:text-[#F5A400] transition-colors">
+            REVIEW
+          </h3>
+<p class="text-xs font-mono text-slate-400 leading-relaxed">
+            Understand the program, structure and expectations.
+          </p>
+</div>
+<div class="pt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-500">
+<span class="">SYLLABUS_AUDIT</span>
+<span class="text-[#F5A400]">→</span>
+</div>
+</div>
+<!-- Step 04 -->
+<div class="p-6 bg-[#0b0f17] border border-white/10 hover:border-[#F5A400]/40 transition-colors flex flex-col justify-between space-y-4 relative group">
+<div class="space-y-3">
+<div class="flex items-center justify-between font-mono text-xs">
+<span class="px-2 py-0.5 bg-[#F5A400]/10 border border-[#F5A400]/30 text-[#F5A400] font-bold">STEP 04</span>
+<span class="text-slate-600 text-[10px] hidden md:inline">// FLOW</span>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide group-hover:text-[#F5A400] transition-colors">
+            CONNECT
+          </h3>
+<p class="text-xs font-mono text-slate-400 leading-relaxed">
+            Connect with AstraTech for the next steps.
+          </p>
+</div>
+<div class="pt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-500">
+<span class="">SYNAPSE_LINK</span>
+<span class="text-[#F5A400]">→</span>
+</div>
+</div>
+<!-- Step 05 -->
+<div class="p-6 bg-[#0b0f17] border border-[#F5A400]/30 hover:border-[#F5A400] transition-colors flex flex-col justify-between space-y-4 relative group shadow-[0_0_15px_rgba(245,164,0,0.1)]">
+<div class="space-y-3">
+<div class="flex items-center justify-between font-mono text-xs">
+<span class="px-2 py-0.5 bg-[#F5A400] text-black font-bold">STEP 05</span>
+<span class="text-[#10b981] text-[10px]">[READY]</span>
+</div>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide group-hover:text-[#F5A400] transition-colors">
+            BEGIN
+          </h3>
+<p class="text-xs sm:text-sm font-mono text-slate-400 leading-relaxed">
+            Start learning, building and growing.
+          </p>
+</div>
+<div class="pt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-[#F5A400]">
+<span class="">EXEC_INIT</span>
+<span class="font-bold">✓</span>
+</div>
+</div>
+</div>
+</div>
+</section><section class="w-full px-4 sm:px-6 py-16 sm:py-20 border-t border-white/10 bg-[#080c14]">
+<div class="max-w-7xl mx-auto text-center flex flex-col items-center space-y-4">
+<span class="text-xs font-mono font-semibold tracking-wider text-[#F5A400] uppercase">
+        [ START BUILDING ]
+      </span>
+<h2 class="pixel-heading text-3xl sm:text-4xl lg:text-5xl text-white font-normal uppercase tracking-wide">
+        FIND YOUR NEXT BUILD.
+      </h2>
+<p class="max-w-xl text-xs sm:text-sm font-mono text-slate-400 leading-relaxed pb-2">
+        Choose a direction, learn the fundamentals and start building.
+      </p>
+<a class="inline-flex items-center gap-2 px-8 py-3.5 bg-[#F5A400] hover:bg-[#d97706] text-black font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(245,164,0,0.2)]" href="#courses">
+<span class="">[ EXPLORE ASTRA → ]</span>
+</a>
+</div>
+</section>
+</main>
+<!-- MODAL A: GET THE CURRICULUM -->
+<div class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center" id="curriculumModal">
+<div class="bg-[#0b0f17] border border-[#F5A400]/40 w-full max-w-lg p-6 sm:p-8 relative shadow-2xl space-y-6">
+<!-- Header -->
+<div class="flex items-center justify-between border-b border-white/10 pb-4">
+<div>
+<span class="text-[10px] font-mono text-[#F5A400] tracking-wider block">// TELEMETRY DISPATCH</span>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide">GET THE CURRICULUM</h3>
+</div>
+<button class="text-xs font-mono text-slate-400 hover:text-white px-2 py-1 border border-white/10 hover:border-slate-400 transition-colors" onclick="closeCurriculumModal()" type="button">
+        [ ✕ CLOSE ]
+      </button>
+</div>
+<!-- Form View -->
+<div class="space-y-4" id="curriculumFormContainer">
+<p class="text-xs font-mono text-slate-400 leading-relaxed">
+        Tell us a little about yourself and we'll send the detailed curriculum directly to your email.
+      </p>
+<form class="space-y-3.5" id="curriculumForm" onsubmit="handleCurriculumSubmit(event)">
+<!-- Full Name -->
+<div class="space-y-1">
+<label class="block text-[11px] font-mono text-slate-300">FULL NAME *</label>
+<input class="w-full bg-[#070A0F] border border-white/15 text-white px-3 py-2 text-xs font-mono focus:border-[#F5A400] focus:ring-0 focus:outline-none" placeholder="e.g. Rahul Sharma" required="" type="text"/>
+</div>
+<!-- Email -->
+<div class="space-y-1">
+<label class="block text-[11px] font-mono text-slate-300">EMAIL *</label>
+<input class="w-full bg-[#070A0F] border border-white/15 text-white px-3 py-2 text-xs font-mono focus:border-[#F5A400] focus:ring-0 focus:outline-none" placeholder="name@domain.com" required="" type="email"/>
+</div>
+<!-- Phone Number -->
+<div class="space-y-1">
+<label class="block text-[11px] font-mono text-slate-300">PHONE NUMBER</label>
+<input class="w-full bg-[#070A0F] border border-white/15 text-white px-3 py-2 text-xs font-mono focus:border-[#F5A400] focus:ring-0 focus:outline-none" placeholder="+91 98765 43210" type="tel"/>
+</div>
+<!-- Current Status -->
+<div class="space-y-1">
+<label class="block text-[11px] font-mono text-slate-300">CURRENT STATUS *</label>
+<select class="w-full bg-[#070A0F] border border-white/15 text-white px-3 py-2 text-xs font-mono focus:border-[#F5A400] focus:ring-0 focus:outline-none" required="">
+<option disabled="" selected="" value="">Select status...</option>
+<option value="Student">Student</option>
+<option value="Working Professional">Working Professional</option>
+<option value="Graduate">Graduate</option>
+<option value="Other">Other</option>
+</select>
+</div>
+<!-- Course -->
+<div class="space-y-1">
+<label class="block text-[11px] font-mono text-slate-300">COURSE *</label>
+<select class="w-full bg-[#070A0F] border border-white/15 text-white px-3 py-2 text-xs font-mono focus:border-[#F5A400] focus:ring-0 focus:outline-none" id="courseSelectField" required="">
+<option value="Full Stack Development">Full Stack Development</option>
+<option value="AI &amp; Machine Learning">AI &amp; Machine Learning</option>
+</select>
+</div>
+<!-- Submit Button -->
+<div class="pt-2">
+<button class="w-full py-2.5 px-4 bg-[#F5A400] hover:bg-[#d97706] text-black font-mono font-bold text-xs uppercase tracking-wider transition-colors" type="submit">
+            [ SEND CURRICULUM → ]
+          </button>
+</div>
+<p class="text-[10px] font-mono text-slate-500 text-center pt-1">
+          Your information is used only to respond to your curriculum request.
+        </p>
+</form>
+</div>
+<!-- Success State -->
+<div class="hidden text-center py-6 space-y-4" id="curriculumSuccessState">
+<div class="w-10 h-10 border border-[#10b981] bg-[#10b981]/10 text-[#10b981] flex items-center justify-center mx-auto text-lg font-mono">
+        ✓
+      </div>
+<h4 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wider">
+        CURRICULUM REQUEST RECEIVED
+      </h4>
+<p class="text-xs font-mono text-slate-300 max-w-xs mx-auto leading-relaxed">
+        The detailed curriculum will be sent to your email.
+      </p>
+<div class="pt-2">
+<button class="py-2 px-6 bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs font-mono font-semibold transition-colors" onclick="closeCurriculumModal()" type="button">
+          [ CLOSE ]
+        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL B: NOTIFY ME MODAL -->
+<div class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center" id="notifyModal">
+<div class="bg-[#0b0f17] border border-[#F5A400]/40 w-full max-w-md p-6 sm:p-8 relative shadow-2xl space-y-4">
+<div class="flex items-center justify-between border-b border-white/10 pb-3">
+<div>
+<span class="text-[10px] font-mono text-[#F5A400] tracking-wider block">// SYLLABUS RELEASE ALERT</span>
+<h3 class="pixel-heading text-2xl text-white font-normal uppercase tracking-wide" id="notifyCourseTitle">NOTIFY ME</h3>
+</div>
+<button class="text-xs font-mono text-slate-400 hover:text-white px-2 py-1 border border-white/10 hover:border-slate-400" onclick="closeNotifyModal()" type="button">[ ✕ ]</button>
+</div>
+<p class="text-xs font-mono text-slate-400 leading-relaxed">
+      Enter your email address below. We'll send you an alert the moment this curriculum is scheduled and declassified for enrollment.
+    </p>
+<form class="space-y-3 pt-1" onsubmit="handleNotifySubmit(event)">
+<div class="space-y-1">
+<label class="block text-[11px] font-mono text-slate-300">EMAIL ADDRESS *</label>
+<input class="w-full bg-[#070A0F] border border-white/15 text-white px-3 py-2 text-xs font-mono focus:border-[#F5A400] focus:ring-0 focus:outline-none" placeholder="developer@domain.com" required="" type="email"/>
+</div>
+<button class="w-full py-2.5 bg-[#F5A400] text-black font-mono font-bold text-xs uppercase hover:bg-[#d97706] transition-colors" type="submit">
+        [ NOTIFY ME → ]
+      </button>
+</form>
+<div class="hidden text-center text-xs font-mono text-[#10b981] pt-2" id="notifySuccess">
+      ✓ RECORD LOGGED. You will receive an alert once syllabus enrollments open.
+    </div>
+</div>
+</div>
+<!-- FOOTER -->
+<footer class="w-full bg-[#05070c] border-t border-[#F5A400]/25 py-12 font-mono text-xs text-slate-400">
+<div class="max-w-7xl mx-auto px-4 sm:px-6">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-slate-800">
+<div class="md:col-span-5 space-y-3">
+<div class="flex items-center gap-2 text-white font-bold text-sm">
+<span class="w-5 h-5 rounded border border-[#F5A400] text-[#F5A400] flex items-center justify-center text-[10px]">&gt;</span>
+<span class="">ASTRATECH AI // SYSTEMS LAB</span>
+</div>
+<p class="text-slate-500 font-sans text-xs max-w-sm">
+          Learn. Build. Deploy. Grow. Developing the engineering vanguard of Jamshedpur &amp; Eastern India.
+        </p>
+<div class="flex items-center gap-3 pt-2">
+<a class="w-7 h-7 rounded border border-slate-800 bg-black flex items-center justify-center text-slate-400 hover:text-[#F5A400] hover:border-[#F5A400] transition-all" href="#"><span class="material-symbols-outlined text-[14px]">photo_camera</span></a>
+<a class="w-7 h-7 rounded border border-slate-800 bg-black flex items-center justify-center text-slate-400 hover:text-[#F5A400] hover:border-[#F5A400] transition-all" href="#"><span class="material-symbols-outlined text-[14px]">share</span></a>
+<a class="w-7 h-7 rounded border border-slate-800 bg-black flex items-center justify-center text-slate-400 hover:text-[#F5A400] hover:border-[#F5A400] transition-all" href="#"><span class="material-symbols-outlined text-[14px]">terminal</span></a>
+<a class="w-7 h-7 rounded border border-slate-800 bg-black flex items-center justify-center text-slate-400 hover:text-[#F5A400] hover:border-[#F5A400] transition-all" href="#"><span class="material-symbols-outlined text-[14px]">smart_display</span></a>
+<a class="w-7 h-7 rounded border border-slate-800 bg-black flex items-center justify-center text-slate-400 hover:text-[#F5A400] hover:border-[#F5A400] transition-all" href="#"><span class="material-symbols-outlined text-[14px]">chat</span></a>
+</div>
+</div>
+<div class="md:col-span-4 space-y-2">
+<span class="text-[#F5A400] font-bold block mb-2">[SECTIONS_INDEX]</span>
+<div class="grid grid-cols-2 gap-2 text-[11px]">
+<a class="hover:text-[#F5A400] transition-colors" data-path="about" href="/about">// ABOUT</a>
+<a class="hover:text-[#F5A400] transition-colors" data-path="courses" href="/courses">// COURSES</a>
+<a class="hover:text-[#F5A400] transition-colors" data-path="developers" href="/about">// DEVELOPERS</a>
+<a class="hover:text-[#F5A400] transition-colors" data-path="projects" href="/projects">// PROJECTS</a>
+<a class="hover:text-[#F5A400] transition-colors" data-path="events" href="#">// EVENTS</a>
+<a class="hover:text-[#F5A400] transition-colors" data-path="media" href="/#media">// MEDIA</a>
+<a class="hover:text-[#F5A400] transition-colors" data-path="contact" href="/#contact">// CONTACT</a>
+</div>
+</div>
+<div class="md:col-span-3 space-y-2">
+<span class="text-[#F5A400] font-bold block mb-2">[REGULATORY]</span>
+<div class="flex flex-col gap-1.5 text-[11px]">
+<a class="hover:text-[#F5A400] transition-colors" data-path="privacy-policy" href="#">// PRIVACY_POLICY</a>
+<a class="hover:text-[#F5A400] transition-colors" data-path="terms" href="#">// TERMS_OF_SERVICE</a>
+<a class="hover:text-[#F5A400] transition-colors" data-path="refund-policy" href="#">// REFUND_POLICY</a>
+</div>
+</div>
+</div>
+<div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500">
+<span class="">© AstraTech AI. Jamshedpur, Jharkhand. All systems operational.</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#10b981] animate-ping"></span>
+<span class="text-[#10b981] font-bold">[NODE_STATUS: ONLINE]</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- Interactive Scripts -->
+<script>
+  function openCurriculumModal(courseName) {
+    const modal = document.getElementById('curriculumModal');
+    const select = document.getElementById('courseSelectField');
+    const formContainer = document.getElementById('curriculumFormContainer');
+    const successState = document.getElementById('curriculumSuccessState');
+
+    if (courseName && select) {
+      select.value = courseName;
+    }
+    formContainer.classList.remove('hidden');
+    successState.classList.add('hidden');
+    modal.classList.remove('hidden');
+  }
+
+  function closeCurriculumModal() {
+    document.getElementById('curriculumModal').classList.add('hidden');
+  }
+
+  function handleCurriculumSubmit(e) {
+    e.preventDefault();
+    document.getElementById('curriculumFormContainer').classList.add('hidden');
+    document.getElementById('curriculumSuccessState').classList.remove('hidden');
+  }
+
+  function triggerNotifyMe(courseTitle) {
+    const modal = document.getElementById('notifyModal');
+    if (courseTitle) {
+      document.getElementById('notifyCourseTitle').innerText = 'NOTIFY: ' + courseTitle;
+    }
+    document.getElementById('notifySuccess').classList.add('hidden');
+    modal.classList.remove('hidden');
+  }
+
+  function closeNotifyModal() {
+    document.getElementById('notifyModal').classList.add('hidden');
+  }
+
+  function handleNotifySubmit(e) {
+    e.preventDefault();
+    document.getElementById('notifySuccess').classList.remove('hidden');
+    setTimeout(() => {
+      closeNotifyModal();
+    }, 2000);
+  }
+</script>
+</body></html>
+
